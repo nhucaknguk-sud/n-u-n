@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nấu Ăn Việt - Học Nấu Ăn Món Việt Ngon Miệng</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <span>Nấu Ăn Việt</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">Trang Chủ</a>
+                <a href="#recipes" class="nav-link">Công Thức</a>
+                <a href="#categories" class="nav-link">Danh Mục</a>
+                <a href="#contact" class="nav-link">Liên Hệ</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Khám Phá Ẩm Thực Việt Nam</h1>
+            <p>Học nấu ăn các món ăn truyền thống Việt Nam ngon tuyệt từ những đầu bếp dày dạn kinh nghiệm</p>
+            <button class="cta-btn" onclick="scrollToRecipes()">Bắt Đầu Ngay</button>
+        </div>
+        <div class="hero-image">
+            <i class="fas fa-bowl-food"></i>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h2>Tìm Kiếm Công Thức Nấu Ăn</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm món ăn yêu thích của bạn..." 
+                       onkeyup="searchRecipes()">
+                <button onclick="searchRecipes()"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2>Danh Mục Món Ăn</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterRecipes('all')">
+                    <i class="fas fa-star"></i>
+                    <h3>Tất cả</h3>
+                </div>
+                <div class="category-card" onclick="filterRecipes('canh')">
+                    <i class="fas fa-mug-hot"></i>
+                    <h3>Canh & Súp</h3>
+                </div>
+                <div class="category-card" onclick="filterRecipes('cơm')">
+                    <i class="fas fa-bowl-rice"></i>
+                    <h3>Cơm & Cháo</h3>
+                </div>
+                <div class="category-card" onclick="filterRecipes('mặn')">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <h3>Mặn & Thịt</h3>
+                </div>
+                <div class="category-card" onclick="filterRecipes('chay')">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Chay & Rau</h3>
+                </div>
+                <div class="category-card" onclick="filterRecipes('tráng miệng')">
+                    <i class="fas fa-ice-cream"></i>
+                    <h3>Tráng Miệng</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipes Section -->
+    <section class="recipes-section" id="recipes">
+        <div class="container">
+            <h2>Công Thức Nấu Ăn</h2>
+            <div class="recipes-grid" id="recipesGrid">
+                <!-- Recipes will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Tại Sao Chọn Chúng Tôi?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-video"></i>
+                    <h3>Video Hướng Dẫn</h3>
+                    <p>Xem hướng dẫn từng bước chi tiết cách nấu ăn</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-list-check"></i>
+                    <h3>Danh Sách Nguyên Liệu</h3>
+                    <p>Liệt kê đầy đủ nguyên liệu cần thiết cho mỗi món</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Thời Gian Nấu</h3>
+                    <p>Biết rõ thời gian chuẩn bị và nấu ăn</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Đánh Giá Cao</h3>
+                    <p>Tất cả công thức đều được kiểm chứng và yêu thích</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nấu Ăn Việt</h3>
+                    <p>Chia sẻ những công thức nấu ăn truyền thống Việt Nam với mọi người.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liên Kết</h3>
+                    <ul>
+                        <li><a href="#home">Trang Chủ</a></li>
+                        <li><a href="#recipes">Công Thức</a></li>
+                        <li><a href="#categories">Danh Mục</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Theo Dõi</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nấu Ăn Việt. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeRecipeModal()">&times;</span>
+            <div id="modalBody">
+                <!-- Recipe details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <span class="modal-close" onclick="closeVideoModal()">&times;</span>
+            <div id="videoContainer">
+                <!-- Video will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Advisor Chatbot -->
+    <div id="aiAdvisorContainer" class="ai-advisor-container">
+        <!-- Toggle Button -->
+        <button id="aiAdvisorToggle" class="ai-advisor-toggle" title="Hỏi AI Tư Vấn">
+            <i class="fas fa-robot"></i>
+            <span class="ai-badge">AI</span>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="aiAdvisorWindow" class="ai-advisor-window hidden">
+            <!-- Header -->
+            <div class="ai-advisor-header">
+                <div class="ai-advisor-title">
+                    <i class="fas fa-robot"></i>
+                    Tư Vấn Nấu Ăn AI
+                </div>
+                <button id="aiAdvisorClose" class="ai-advisor-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Messages -->
+            <div id="aiAdvisorMessages" class="ai-advisor-messages">
+                <div class="ai-message">
+                    <div class="ai-message-content">
+                        👋 Xin chào! Tôi là trợ lý AI nấu ăn. Hỏi tôi bất cứ điều gì về nấu ăn, công thức, hoặc các mẹo nấu ăn!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input -->
+            <div class="ai-advisor-input-area">
+                <input 
+                    type="text" 
+                    id="aiAdvisorInput" 
+                    class="ai-advisor-input" 
+                    placeholder="Gõ câu hỏi của bạn..." 
+                    autocomplete="off"
+                >
+                <button id="aiAdvisorSend" class="ai-advisor-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+
+            <!-- Quick Questions -->
+            <div class="ai-advisor-suggestions">
+                <button class="ai-suggestion-btn" onclick="askAI('Phở Bò nấu như thế nào?')">
+                    <i class="fas fa-question"></i> Phở Bò
+                </button>
+                <button class="ai-suggestion-btn" onclick="askAI('Mẹo nấu ăn gì?')">
+                    <i class="fas fa-lightbulb"></i> Mẹo
+                </button>
+                <button class="ai-suggestion-btn" onclick="askAI('Có công thức nào dễ?')">
+                    <i class="fas fa-fork"></i> Dễ nấu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="css/ai-advisor.css">
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!-- AI Advisor Chatbot -->
+<div id="aiAdvisorContainer" class="ai-advisor-container">
+    <!-- Toggle Button -->
+    <button id="aiAdvisorToggle" class="ai-advisor-toggle" title="Hỏi AI Tư Vấn">
+        <i class="fas fa-robot"></i>
+        <span class="ai-badge">AI</span>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="aiAdvisorWindow" class="ai-advisor-window hidden">
+        <!-- Header -->
+        <div class="ai-advisor-header">
+            <div class="ai-advisor-title">
+                <i class="fas fa-robot"></i>
+                Tư Vấn Nấu Ăn AI
+            </div>
+            <button id="aiAdvisorClose" class="ai-advisor-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Messages -->
+        <div id="aiAdvisorMessages" class="ai-advisor-messages">
+            <div class="ai-message">
+                <div class="ai-message-content">
+                    👋 Xin chào! Tôi là trợ lý AI nấu ăn. Hỏi tôi bất cứ điều gì về nấu ăn, công thức, hoặc các mẹo nấu ăn!
+                </div>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="ai-advisor-input-area">
+            <input 
+                type="text" 
+                id="aiAdvisorInput" 
+                class="ai-advisor-input" 
+                placeholder="Gõ câu hỏi của bạn..." 
+                autocomplete="off"
+            >
+            <button id="aiAdvisorSend" class="ai-advisor-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <!-- Quick Questions -->
+        <div class="ai-advisor-suggestions">
+            <button class="ai-suggestion-btn" onclick="askAI('Phở Bò nấu như thế nào?')">
+                <i class="fas fa-question"></i> Phở Bò
+            </button>
+            <button class="ai-suggestion-btn" onclick="askAI('Mẹo nấu ăn gì?')">
+                <i class="fas fa-lightbulb"></i> Mẹo
+            </button>
+            <button class="ai-suggestion-btn" onclick="askAI('Có công thức nào dễ?')">
+                <i class="fas fa-fork"></i> Dễ nấu
+            </button>
+        </div>
+    </div>
+</div>
