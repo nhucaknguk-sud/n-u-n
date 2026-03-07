@@ -1,0 +1,27 @@
+{
+  "name": "nauan-ai-advisor-backend",
+  "version": "1.0.0",
+  "description": "Backend server for AI Food Advisor using OpenAI API",
+  "main": "backend.js",
+  "scripts": {
+    "start": "node backend.js",
+    "dev": "nodemon backend.js"
+  },
+  "keywords": [
+    "openai",
+    "chatgpt",
+    "food-advisor",
+    "vietnamese-recipes"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

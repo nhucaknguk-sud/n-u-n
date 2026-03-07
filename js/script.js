@@ -841,7 +841,7 @@ function askAI(question) {
     }
 }
 
-function sendAIMessage() {
+async function sendAIMessage() {
     const input = document.getElementById('aiAdvisorInput');
     const messagesContainer = document.getElementById('aiAdvisorMessages');
     
@@ -850,7 +850,7 @@ function sendAIMessage() {
     const question = input.value.trim();
     if (!question) return;
 
-    // Add user message
+    // Add user message to UI
     const userMessageDiv = document.createElement('div');
     userMessageDiv.className = 'user-message';
     userMessageDiv.innerHTML = `<div class="user-message-content">${escapeHtml(question)}</div>`;
@@ -858,6 +858,7 @@ function sendAIMessage() {
 
     // Clear input
     input.value = '';
+    input.disabled = true;
 
     // Scroll to bottom
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -865,39 +866,44 @@ function sendAIMessage() {
     // Show typing indicator
     const typingDiv = document.createElement('div');
     typingDiv.className = 'ai-message';
+    typingDiv.id = 'ai-typing-indicator';
     typingDiv.innerHTML = '<div class="ai-message-content"><div class="ai-typing"><span></span><span></span><span></span></div></div>';
     messagesContainer.appendChild(typingDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    // Simulate AI response
-    setTimeout(() => {
+    // Get AI response (using OpenAI or fallback)
+    const aiResponse = await aiAdvisor.sendToOpenAI(question);
+    
+    // Remove typing indicator
+    if (typingDiv.parentNode) {
         typingDiv.remove();
-        const aiResponse = generateAIResponse(question);
-        const aiMessageDiv = document.createElement('div');
-        aiMessageDiv.className = 'ai-message';
-        aiMessageDiv.innerHTML = `<div class="ai-message-content">${aiResponse}</div>`;
-        messagesContainer.appendChild(aiMessageDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }, 1500);
+    }
+
+    // Add AI response to UI
+    const aiMessageDiv = document.createElement('div');
+    aiMessageDiv.className = 'ai-message';
+    aiMessageDiv.innerHTML = `<div class="ai-message-content">${convertMarkdownToHtml(escapeHtml(aiResponse))}</div>`;
+    messagesContainer.appendChild(aiMessageDiv);
+    
+    // Re-enable input
+    input.disabled = false;
+    input.focus();
+    
+    // Scroll to bottom
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-function generateAIResponse(question) {
-    const lowerQuestion = question.toLowerCase();
-    
-    // Response based on keywords
-    if (lowerQuestion.includes('phở') || lowerQuestion.includes('phở bò')) {
-        return '🍜 Phở bò là một món canh truyền thống tuyệt vời! Bí quyết chính là nước dùng phải được nấu từ xương bò trong 3-4 giờ. Hãy xem công thức chi tiết của chúng tôi để biết thêm chi tiết từng bước!';
-    } else if (lowerQuestion.includes('mẹo') || lowerQuestion.includes('tip')) {
-        return '💡 Một số mẹo nấu ăn hữu ích:\n• Chuẩn bị tất cả nguyên liệu trước (mise en place)\n• Sử dụng lửa vừa phải để tránh cướp cháy\n• Nêm gia vị từng chút để tránh nêm quá mặn\n• Để thịt cá nghỉ trước khi cắt để giữ độ nướu\nCó công thức nào khác bạn cần giúp?';
-    } else if (lowerQuestion.includes('dễ') || lowerQuestion.includes('nhanh')) {
-        return '⚡ Các món ăn dễ và nhanh:\n• Cơm tấm Sài Gòn (1 giờ)\n• Gỏi cuốn (30 phút)\n• Mốc nướng muối ớt (45 phút)\nHãy chọn một trong những công thức này để bắt đầu!';
-    } else if (lowerQuestion.includes('bánh chưng')) {
-        return '📦 Bánh chưng là một biểu tượng của Tết! Mặc dù gói bánh chưng hơi phức tạp, nhưng kết quả sẽ rất đáng giá. Đây là một truyền thống gia đình tuyệt vời. Bạn muốn xem hướng dẫn chi tiết?';
-    } else if (lowerQuestion.includes('nem') || lowerQuestion.includes('cuốn')) {
-        return '🌮 Nem rán và gỏi cuốn là những món khai vị yêu thích! Nem rán dùng chiên chưa, trong khi gỏi cuốn thì lạnh. Cả hai đều rất ngon khi ăn kèm nước mắm chua!';
-    } else {
-        return '😊 Đó là một câu hỏi thú vị! Tôi có thể giúp bạn với công thức nấu ăn, mẹo nấu ăn, hoặc hướng dẫn chi tiết từng bước. Bạn muốn biết gì tiếp theo?';
-    }
+// Helper function to convert markdown-like formatting to HTML
+function convertMarkdownToHtml(text) {
+    // Convert **bold** to <strong>bold</strong>
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // Convert *italic* to <em>italic</em>
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    // Convert newlines to <br>
+    text = text.replace(/\n/g, '<br>');
+    // Convert emoji + text to list items (simple approximation)
+    text = text.replace(/([✨👈🎯💡✅👇🤔📝])/g, '<br>$1');
+    return text;
 }
 
 function escapeHtml(text) {

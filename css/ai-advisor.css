@@ -167,13 +167,27 @@
     border-radius: 12px;
     word-wrap: break-word;
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .ai-message-content {
     background: white;
     color: #333;
     border: 1px solid #e0e0e0;
+}
+
+.ai-message-content strong {
+    font-weight: 600;
+    color: #2c5f2d;
+}
+
+.ai-message-content em {
+    font-style: italic;
+    color: #666;
+}
+
+.ai-message-content br {
+    margin: 4px 0;
 }
 
 .user-message-content {
