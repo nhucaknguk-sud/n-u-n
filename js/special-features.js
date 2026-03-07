@@ -308,6 +308,7 @@ function performAdvancedSearch() {
     });
 
     displayRecipes(results);
+    closeAdvancedSearch();
 }
 
 function showAdvancedSearch() {
