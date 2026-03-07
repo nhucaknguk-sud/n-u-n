@@ -1,6 +1,6 @@
 // AI Configuration - Update this with your API key
 const AI_CONFIG = {
-    apiKey: 'sk-your-api-key-here', // Replace with your OpenAI API key
+    apiKey: 'sk-your-api-key-here', // ⚠️ THAY ĐỔI: Lấy API key từ .env hoặc environment variable
     apiModel: 'gpt-3.5-turbo',
     maxTokens: 250,                 // ⚡ Giảm từ 500 → 250 (trả lời nhanh hơn)
     temperature: 0.5,               // ⚡ Giảm từ 0.7 → 0.5 (nhanh hơn)
