@@ -1,26 +1,32 @@
-// AI Configuration - Update this with your API key
+// AI Configuration - NEVER put real API keys here!
+// Backend reads from .env file (see backend.js)
 const AI_CONFIG = {
-    apiKey: 'sk-your-api-key-here', // ⚠️ THAY ĐỔI: Lấy API key từ .env hoặc environment variable
+    apiKey: '', // ❌ Backend handles API key via .env
     apiModel: 'gpt-3.5-turbo',
-    maxTokens: 250,                 // ⚡ Giảm từ 500 → 250 (trả lời nhanh hơn)
-    temperature: 0.5,               // ⚡ Giảm từ 0.7 → 0.5 (nhanh hơn)
-    timeout: 15000,                 // ⚡ Timeout 15 giây (tránh chờ quá lâu)
-    systemPrompt: `Bạn là trợ lý nấu ăn AI chuyên về Việt Nam.
-Trả lời NGẮN, NHANH, TRỰC TIẾP (2-3 câu tối đa).
-Luôn dùng Tiếng Việt. Dùng emoji. Giữ câu trả lời dưới 150 từ.`
+    maxTokens: 500,
+    temperature: 0.7,
+    timeout: 30000,
+    systemPrompt: `Bạn là trợ lý nấu ăn AI chuyên về Việt Nam có khả năng suy luận độc lập.
+
+**VỀ CÁCH BẠN HOẠT ĐỘNG:**
+1. Suy luận trước khi trả lời - phân tích câu hỏi
+2. Tư duy độc lập - không chỉ dùng template
+3. Giải thích lý do của câu trả lời
+
+**HƯỚNG DẪN:**
+- Trả lời NGẮN, NHANH, TRỰC TIẾP
+- Luôn dùng Tiếng Việt với emoji
+- Giữ dưới 200 từ
+
+**NỘI DUNG:**
+- Chuyên gia nấu ăn Việt Nam
+- Giải thích kỹ thuật nấu, mẹo, công thức
+- Suy luận về kết hợp nguyên liệu`
 };
 
-// Utility function to check if API key is configured
 function isAPIKeyConfigured() {
-    return AI_CONFIG.apiKey && 
-           AI_CONFIG.apiKey !== 'sk-your-api-key-here' && 
-           AI_CONFIG.apiKey.startsWith('sk-');
+    return true;
 }
 
-// Utility function to validate API key format
-function validateAPIKey(key) {
-    return key && key.startsWith('sk-') && key.length > 30;
-}
+console.log('✅ AI Configuration loaded. Backend handles API key.');
 
-// Log configuration status
-console.log('AI Configuration loaded. API Key configured:', isAPIKeyConfigured());

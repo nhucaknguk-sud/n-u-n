@@ -10,14 +10,18 @@ class AIAdvisor {
 
     // Generate a summary of recipes to provide context to AI
     generateRecipeSummary() {
-        if (typeof recipes === 'undefined') return '';
-        
-        // ⚡ Rút gọn recipe summary để giảm tokens
-        const recipeList = recipes.slice(0, 5).map(r => 
-            `${r.title}`
-        ).join(', ');
-
-        return `\nCông thức: ${recipeList}...`;
+        try {
+            if (typeof window !== 'undefined' && 
+                typeof recipes !== 'undefined' && 
+                Array.isArray(recipes) && 
+                recipes.length > 0) {
+                const recipeList = recipes.slice(0, 5).map(r => r.title || r).join(', ');
+                return `\nCông thức: ${recipeList}...`;
+            }
+        } catch (e) {
+            console.warn('generateRecipeSummary error:', e);
+        }
+        return '';
     }
 
     // Build context for the AI to understand the website
@@ -31,9 +35,9 @@ class AIAdvisor {
             role: role,
             content: content
         });
-        // ⚡ Keep only last 5 messages to reduce tokens & speed up
-        if (this.conversationHistory.length > 5) {
-            this.conversationHistory = this.conversationHistory.slice(-5);
+        // Keep last 10 messages for better context
+        if (this.conversationHistory.length > 10) {
+            this.conversationHistory = this.conversationHistory.slice(-10);
         }
     }
 
@@ -197,5 +201,13 @@ class AIAdvisor {
     }
 }
 
-// Create global instance
-const aiAdvisor = new AIAdvisor();
+// Lazy initialization - create AIAdvisor only when first needed
+let aiAdvisor = null;
+
+function getAIAdvisor() {
+    if (!aiAdvisor) {
+        console.log('🚀 Initializing AIAdvisor...');
+        aiAdvisor = new AIAdvisor();
+    }
+    return aiAdvisor;
+}

@@ -871,8 +871,8 @@ async function sendAIMessage() {
     messagesContainer.appendChild(typingDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    // Get AI response (using OpenAI or fallback)
-    const aiResponse = await aiAdvisor.sendToOpenAI(question);
+    // Get AI response
+    const aiResponse = await getAIAdvisor().sendToOpenAI(question);
     
     // Remove typing indicator
     if (typingDiv.parentNode) {
