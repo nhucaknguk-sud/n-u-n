@@ -1881,6 +1881,9 @@ function displayRecipes(recipesToDisplay) {
             <div class="recipe-image">
                 <img src="${recipe.image}" alt="${recipe.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                 <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:80px; background:linear-gradient(135deg, var(--primary-color), var(--secondary-color));">${recipe.emoji}</div>
+                <button class="favorite-btn" data-recipe-id="${recipe.id}" onclick="toggleFavorite(${recipe.id}, event)" title="Thêm vào yêu thích">
+                    <i class="far fa-heart"></i>
+                </button>
             </div>
             <div class="recipe-content">
                 <span class="recipe-category">${recipe.category}</span>
@@ -1891,9 +1894,20 @@ function displayRecipes(recipesToDisplay) {
                     <span><i class="fas fa-chart-line"></i> ${recipe.difficulty}</span>
                     <span><i class="fas fa-users"></i> ${recipe.serves}</span>
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="rating-display" data-recipe-id="${recipe.id}">
+                    <div class="rating-stars" onclick="event.stopPropagation()">
+                        ${[1,2,3,4,5].map(i => `
+                            <i class="fas fa-star rating-star" data-rating="${i}" 
+                               onclick="setRating(${recipe.id}, ${i}, event)"
+                               style="color: ${i <= (ratingManager?.getRating(recipe.id) || 0) ? '#ffc107' : '#ddd'};
+                                      cursor: pointer; margin-right: 3px;"></i>
+                        `).join('')}
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
                     <button class="recipe-btn" onclick="openRecipeModal(event)">Xem Chi Tiết</button>
                     <button class="recipe-btn" style="background-color: #e74c3c;" onclick="openVideoModal('${recipe.video}', event)"><i class="fas fa-play"></i> Video</button>
+                    <button class="recipe-btn" style="background-color: #3498db;" onclick="showCollectionsModal(${recipe.id})" title="Thêm vào danh sách"><i class="fas fa-list"></i> Lưu</button>
                 </div>
             </div>
         `;

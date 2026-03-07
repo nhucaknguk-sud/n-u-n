@@ -49,9 +49,53 @@
                 <input type="text" id="searchInput" placeholder="Tìm kiếm món ăn yêu thích của bạn..." 
                        onkeyup="searchRecipes()">
                 <button onclick="searchRecipes()"><i class="fas fa-search"></i></button>
+                <button class="advanced-search-btn" onclick="showAdvancedSearch()" title="Tìm kiếm nâng cao">
+                    <i class="fas fa-sliders-h"></i> Nâng Cao
+                </button>
             </div>
         </div>
     </section>
+
+    <!-- Advanced Search Modal -->
+    <div id="advancedSearchModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="modal-close" onclick="closeAdvancedSearch()">&times;</span>
+            <h2>🔍 Tìm Kiếm Nâng Cao</h2>
+            <div class="advanced-search-form">
+                <div class="form-group">
+                    <label>Nguyên liệu:</label>
+                    <input type="text" id="advSearchIngredient" placeholder="VD: tôm, thịt, rau...">
+                </div>
+                <div class="form-group">
+                    <label>Độ khó:</label>
+                    <select id="advSearchDifficulty">
+                        <option value="">-- Tất cả --</option>
+                        <option value="Dễ">Dễ</option>
+                        <option value="Trung bình">Trung bình</option>
+                        <option value="Khó">Khó</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Thời gian tối đa (phút):</label>
+                    <input type="number" id="advSearchTime" placeholder="VD: 60" min="1">
+                </div>
+                <div class="form-group">
+                    <label>Danh mục:</label>
+                    <select id="advSearchCategory">
+                        <option value="all">-- Tất cả --</option>
+                        <option value="canh">Canh & Súp</option>
+                        <option value="cơm">Cơm & Cháo</option>
+                        <option value="mặn">Mặn & Thịt</option>
+                        <option value="chay">Chay & Rau</option>
+                        <option value="tráng miệng">Tráng Miệng</option>
+                    </select>
+                </div>
+                <button class="cta-btn" onclick="performAdvancedSearch()">
+                    <i class="fas fa-search"></i> Tìm Kiếm
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Categories Section -->
     <section class="categories" id="categories">
@@ -238,6 +282,7 @@
 
     <link rel="stylesheet" href="css/ai-advisor.css">
     <script src="config.js"></script>
+    <script src="js/special-features.js"></script>
     <script src="js/ai-advisor.js"></script>
     <script src="js/script.js"></script>
 </body>
