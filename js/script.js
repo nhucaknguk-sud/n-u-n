@@ -39,7 +39,7 @@ const recipes = [
         title: "Bánh Chưng",
         category: "chay",
         emoji: "📦",
-        image: "https://images.unsplash.com/photo-1618053743606-7f8d0b814901?w=500&h=500&fit=crop",
+        image: "images/banh-trung.png",
         video: "https://www.youtube.com/embed/H-n2OvHb9xw",
         description: "Bánh chưng là món ăn truyền thống dịp Tết với hình vuông",
         time: "4 giờ",
@@ -70,7 +70,7 @@ const recipes = [
         title: "Bún Riêu",
         category: "canh",
         emoji: "🍜",
-        image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop",
+        image: "images/bun-rieu.png",
         video: "https://www.youtube.com/embed/MYMmzxSm3uA",
         description: "Bún riêu là một trong những món canh ngon nhất của Việt Nam",
         time: "2.5 giờ",
@@ -102,7 +102,7 @@ const recipes = [
         title: "Cơm Tấm Sài Gòn",
         category: "cơm",
         emoji: "🍚",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
+        image: "images/com-tam-sai-gon.png",
         video: "https://www.youtube.com/embed/5eZNnEhCGkk",
         description: "Cơm tấm kèm với thịt nạm nướng là đặc sản nổi tiếng Sài Gòn",
         time: "1 giờ",
@@ -130,7 +130,7 @@ const recipes = [
         title: "Mốc Nướng Muối Ớt",
         category: "mặn",
         emoji: "🐟",
-        image: "https://images.unsplash.com/photo-1580959375944-abd7e991f971?w=500&h=500&fit=crop",
+        image: "images/oc-nuong-muoi-ot.png",
         video: "https://www.youtube.com/embed/4dpEWpvZcbI",
         description: "Mốc nướng muối ớt là một trong những món ăn hấp dẫn bậc nhất",
         time: "45 phút",
@@ -160,7 +160,7 @@ const recipes = [
         title: "Nem Rán",
         category: "mặn",
         emoji: "🌮",
-        image: "https://images.unsplash.com/photo-1609501676725-7186f017a4b1?w=500&h=500&fit=crop",
+        image: "images/nem-ran.png",
         video: "https://www.youtube.com/embed/J4aPdyj7Cpc",
         description: "Nem rán là một trong những món ăn khai vị yêu thích nhất",
         time: "1 giờ",
@@ -191,7 +191,7 @@ const recipes = [
         title: "Gỏi Cuốn",
         category: "chay",
         emoji: "🥒",
-        image: "https://images.unsplash.com/photo-1585032226651-759b98d7afd4?w=500&h=500&fit=crop",
+        image: "images/goi-quan.png",
         video: "https://www.youtube.com/embed/Y0dOUqj8EpE",
         description: "Gỏi cuốn là món khai vị làm lạnh tươi mát lạm",
         time: "30 phút",
@@ -220,7 +220,7 @@ const recipes = [
         title: "Chè Đen",
         category: "tráng miệng",
         emoji: "🥤",
-        image: "https://images.unsplash.com/photo-1545689519-275605dc91fd?w=500&h=500&fit=crop",
+        image: "images/che-den.png",
         video: "https://www.youtube.com/embed/7ykPVb6KUlA",
         description: "Chè đen là một loại chè có công dụng mát và thanh thoát",
         time: "2 giờ",
@@ -249,7 +249,7 @@ const recipes = [
         title: "Bún Bò Huế",
         category: "canh",
         emoji: "🍜",
-        image: "https://images.unsplash.com/photo-1582878657708-bc07aa60bd45?w=500&h=500&fit=crop",
+        image: "images/bun-bo-hue.png",
         video: "https://www.youtube.com/embed/mNrXh-9TTNE",
         description: "Bún bò Huế là một món canh nổi tiếng từ Huế với hương vị cay nồng",
         time: "2.5 giờ",
@@ -282,7 +282,7 @@ const recipes = [
         title: "Cơm Chiên Dương Châu",
         category: "cơm",
         emoji: "🍚",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
+        image: "images/com-chien-duong-chau.png",
         video: "https://www.youtube.com/embed/sAIbatfNkL8",
         description: "Cơm chiên dương châu với tôm, thịt và trứng là một món ăn ngon và bổ dưỡng",
         time: "30 phút",
@@ -1874,7 +1874,6 @@ function displayRecipes(recipesToDisplay) {
     recipesToDisplay.forEach(recipe => {
         const recipeCard = document.createElement('div');
         recipeCard.className = 'recipe-card';
-        window.currentRecipe = recipe;
         recipeCard.onclick = () => openRecipeModal(recipe);
 
         recipeCard.innerHTML = `
@@ -1905,7 +1904,7 @@ function displayRecipes(recipesToDisplay) {
                     </div>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
-                    <button class="recipe-btn" onclick="openRecipeModal(event)">Xem Chi Tiết</button>
+                    <button class="recipe-btn" onclick="openRecipeModalById(${recipe.id}, event)">Xem Chi Tiết</button>
                     <button class="recipe-btn" style="background-color: #e74c3c;" onclick="openVideoModal('${recipe.video}', event)"><i class="fas fa-play"></i> Video</button>
                     <button class="recipe-btn" style="background-color: #3498db;" onclick="showCollectionsModal(${recipe.id})" title="Thêm vào danh sách"><i class="fas fa-list"></i> Lưu</button>
                 </div>
@@ -1917,7 +1916,7 @@ function displayRecipes(recipesToDisplay) {
 }
 
 // Filter by Category
-function filterRecipes(category) {
+function filterRecipes(category, event) {
     currentFilter = category;
 
     if (category === 'all') {
@@ -1936,12 +1935,15 @@ function filterRecipes(category) {
             icon.style.color = 'var(--primary-color)';
         });
     });
-    
-    event.target.closest('.category-card').style.backgroundColor = 'var(--primary-color)';
-    event.target.closest('.category-card').style.color = 'var(--white)';
-    event.target.closest('.category-card').querySelectorAll('i').forEach(icon => {
-        icon.style.color = 'var(--white)';
-    });
+
+    const activeCard = event?.target?.closest('.category-card');
+    if (activeCard) {
+        activeCard.style.backgroundColor = 'var(--primary-color)';
+        activeCard.style.color = 'var(--white)';
+        activeCard.querySelectorAll('i').forEach(icon => {
+            icon.style.color = 'var(--white)';
+        });
+    }
 }
 
 // Search Recipes
@@ -1958,19 +1960,20 @@ function searchRecipes() {
 }
 
 // Open Recipe Modal
-function openRecipeModal(eventOrRecipe) {
-    // Handle both click event and direct recipe object
-    let recipe;
-    if (eventOrRecipe.preventDefault) {
-        // It's an event
-        eventOrRecipe.preventDefault();
-        eventOrRecipe.stopPropagation();
-        recipe = window.currentRecipe;
-    } else {
-        // It's a recipe object
-        recipe = eventOrRecipe;
-        window.currentRecipe = recipe;
+function openRecipeModalById(recipeId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
     }
+
+    const recipe = recipes.find(item => item.id === recipeId);
+    if (recipe) {
+        openRecipeModal(recipe);
+    }
+}
+
+function openRecipeModal(recipe) {
+    if (!recipe) return;
     
     const modal = document.getElementById('recipeModal');
     const modalBody = document.getElementById('modalBody');
@@ -2185,12 +2188,19 @@ async function sendAIMessage() {
     messagesContainer.appendChild(typingDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    // Get AI response
-    const aiResponse = await getAIAdvisor().sendToOpenAI(question);
-    
-    // Remove typing indicator
-    if (typingDiv.parentNode) {
-        typingDiv.remove();
+    let aiResponse = '';
+    try {
+        aiResponse = await getAIAdvisor().sendToOpenAI(question);
+    } catch (error) {
+        console.error('AI advisor request failed:', error);
+        aiResponse = 'Xin lỗi, hiện tại AI Advisor đang bận. Vui lòng thử lại sau ít phút.';
+    } finally {
+        // Always remove typing state and unlock input.
+        if (typingDiv.parentNode) {
+            typingDiv.remove();
+        }
+        input.disabled = false;
+        input.focus();
     }
 
     // Add AI response to UI
@@ -2198,11 +2208,7 @@ async function sendAIMessage() {
     aiMessageDiv.className = 'ai-message';
     aiMessageDiv.innerHTML = `<div class="ai-message-content">${convertMarkdownToHtml(escapeHtml(aiResponse))}</div>`;
     messagesContainer.appendChild(aiMessageDiv);
-    
-    // Re-enable input
-    input.disabled = false;
-    input.focus();
-    
+
     // Scroll to bottom
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
