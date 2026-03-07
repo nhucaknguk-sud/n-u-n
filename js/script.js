@@ -1902,6 +1902,7 @@ function displayRecipes(recipesToDisplay) {
                                       cursor: pointer; margin-right: 3px;"></i>
                         `).join('')}
                     </div>
+                    <span class="rating-summary">${ratingManager?.getAverageRatingLabel(recipe.id) || 'Chưa có đánh giá'}</span>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
                     <button class="recipe-btn" onclick="openRecipeModalById(${recipe.id}, event)">Xem Chi Tiết</button>
@@ -1977,6 +1978,7 @@ function openRecipeModal(recipe) {
     
     const modal = document.getElementById('recipeModal');
     const modalBody = document.getElementById('modalBody');
+    modal.dataset.recipeId = recipe.id;
 
     let ingredientsList = '';
     recipe.ingredients.forEach(ingredient => {
@@ -2013,6 +2015,21 @@ function openRecipeModal(recipe) {
                 </div>
             </div>
 
+            <div class="recipe-detail-rating">
+                <h3><i class="fas fa-star"></i> Đánh Giá Cộng Đồng</h3>
+                <div class="rating-display">
+                    <div class="rating-stars">
+                        ${[1,2,3,4,5].map(i => `
+                            <i class="fas fa-star rating-star" data-rating="${i}"
+                               onclick="setRating(${recipe.id}, ${i}, event)"
+                               style="color: ${i <= (ratingManager?.getRating(recipe.id) || 0) ? '#ffc107' : '#ddd'};
+                                      cursor: pointer; margin-right: 3px;"></i>
+                        `).join('')}
+                    </div>
+                    <span class="rating-summary">${ratingManager?.getAverageRatingLabel(recipe.id) || 'Chưa có đánh giá'}</span>
+                </div>
+            </div>
+
             <div class="recipe-ing">
                 <h3><i class="fas fa-list"></i> Nguyên Liệu</h3>
                 <ul>${ingredientsList}</ul>
@@ -2038,6 +2055,7 @@ function openRecipeModal(recipe) {
 function closeRecipeModal() {
     const modal = document.getElementById('recipeModal');
     modal.style.display = 'none';
+    delete modal.dataset.recipeId;
 }
 
 // Open Video Modal

@@ -13,11 +13,14 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const fs = require('fs/promises');
+const path = require('path');
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ratingsFilePath = path.join(__dirname, 'data', 'ratings.json');
 
 // Middleware
 app.use(cors());
@@ -29,9 +32,112 @@ app.use((req, res, next) => {
     next();
 });
 
+async function ensureRatingsStore() {
+    await fs.mkdir(path.dirname(ratingsFilePath), { recursive: true });
+
+    try {
+        await fs.access(ratingsFilePath);
+    } catch {
+        await fs.writeFile(ratingsFilePath, '{}', 'utf8');
+    }
+}
+
+async function readRatingsStore() {
+    await ensureRatingsStore();
+    const raw = await fs.readFile(ratingsFilePath, 'utf8');
+    return raw ? JSON.parse(raw) : {};
+}
+
+async function writeRatingsStore(ratings) {
+    await ensureRatingsStore();
+    await fs.writeFile(ratingsFilePath, JSON.stringify(ratings, null, 2), 'utf8');
+}
+
+function summarizeRatings(ratings) {
+    return Object.fromEntries(
+        Object.entries(ratings).map(([recipeId, details]) => {
+            const count = Number(details.count || 0);
+            const total = Number(details.total || 0);
+            const average = count > 0 ? total / count : 0;
+
+            return [recipeId, {
+                average: Number(average.toFixed(1)),
+                count
+            }];
+        })
+    );
+}
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'OK', apiConfigured: !!process.env.OPENAI_API_KEY });
+});
+
+app.get('/api/ratings', async (req, res) => {
+    try {
+        const ratings = await readRatingsStore();
+        res.json({ ratings: summarizeRatings(ratings) });
+    } catch (error) {
+        console.error('Cannot read ratings store:', error);
+        res.status(500).json({ error: 'Cannot read ratings data' });
+    }
+});
+
+app.get('/api/ratings/:recipeId', async (req, res) => {
+    try {
+        const ratings = await readRatingsStore();
+        const summary = summarizeRatings(ratings);
+        const recipeId = String(req.params.recipeId);
+
+        res.json({
+            recipeId,
+            summary: summary[recipeId] || { average: 0, count: 0 }
+        });
+    } catch (error) {
+        console.error('Cannot read recipe rating:', error);
+        res.status(500).json({ error: 'Cannot read recipe rating' });
+    }
+});
+
+app.post('/api/ratings', async (req, res) => {
+    const { recipeId, rating, clientId } = req.body || {};
+    const normalizedRecipeId = String(recipeId || '').trim();
+    const numericRating = Number(rating);
+    const normalizedClientId = String(clientId || '').trim();
+
+    if (!normalizedRecipeId || !normalizedClientId || !Number.isFinite(numericRating) || numericRating < 1 || numericRating > 5) {
+        return res.status(400).json({
+            error: 'recipeId, clientId và rating hợp lệ là bắt buộc'
+        });
+    }
+
+    try {
+        const ratings = await readRatingsStore();
+        const existing = ratings[normalizedRecipeId] || {
+            total: 0,
+            count: 0,
+            users: {}
+        };
+
+        const previousRating = Number(existing.users[normalizedClientId] || 0);
+        if (previousRating > 0) {
+            existing.total -= previousRating;
+        } else {
+            existing.count += 1;
+        }
+
+        existing.users[normalizedClientId] = numericRating;
+        existing.total += numericRating;
+        ratings[normalizedRecipeId] = existing;
+
+        await writeRatingsStore(ratings);
+
+        const summary = summarizeRatings(ratings)[normalizedRecipeId] || { average: 0, count: 0 };
+        res.json({ recipeId: normalizedRecipeId, summary });
+    } catch (error) {
+        console.error('Cannot save rating:', error);
+        res.status(500).json({ error: 'Cannot save rating' });
+    }
 });
 
 // OpenAI Proxy Endpoint

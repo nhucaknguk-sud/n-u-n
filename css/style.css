@@ -626,6 +626,7 @@ body {
 .rating-display {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
     margin: 10px 0;
 }
@@ -642,6 +643,25 @@ body {
 
 .rating-star:hover {
     transform: scale(1.2);
+}
+
+.rating-summary {
+    color: var(--secondary-color);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.recipe-detail-rating {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--light-bg);
+    border-radius: 10px;
+}
+
+.recipe-detail-rating h3 {
+    color: var(--secondary-color);
+    margin-bottom: 12px;
+    font-size: 20px;
 }
 
 /* Advanced Search Button */
@@ -773,7 +793,6 @@ body {
         font-size: 12px;
         padding: 8px 10px;
     }
-}
 }
 
 @keyframes slideIn {

@@ -78,7 +78,11 @@ class FavoritesManager {
 class RatingManager {
     constructor() {
         this.storageKey = 'nauan_ratings';
+        this.clientIdKey = 'nauan_rating_client_id';
         this.ratings = this.loadRatings();
+        this.communityRatings = {};
+        this.apiBaseUrl = this.getApiBaseUrl();
+        this.apiAvailable = false;
     }
 
     loadRatings() {
@@ -88,6 +92,53 @@ class RatingManager {
 
     saveRatings() {
         localStorage.setItem(this.storageKey, JSON.stringify(this.ratings));
+    }
+
+    getApiBaseUrl() {
+        if (typeof window === 'undefined') {
+            return '/api/ratings';
+        }
+
+        const { hostname, origin } = window.location;
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            return `http://${hostname}:3000/api/ratings`;
+        }
+
+        return `${origin}/api/ratings`;
+    }
+
+    getClientId() {
+        let clientId = localStorage.getItem(this.clientIdKey);
+
+        if (!clientId) {
+            clientId = `client_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+            localStorage.setItem(this.clientIdKey, clientId);
+        }
+
+        return clientId;
+    }
+
+    normalizeSummary(summary) {
+        const average = Number(summary?.average || 0);
+        const count = Number(summary?.count || 0);
+
+        return {
+            average: Number.isFinite(average) ? average : 0,
+            count: Number.isFinite(count) ? count : 0
+        };
+    }
+
+    getCommunitySummary(recipeId) {
+        return this.normalizeSummary(this.communityRatings[recipeId]);
+    }
+
+    getRatingCount(recipeId) {
+        const community = this.getCommunitySummary(recipeId);
+        if (community.count > 0) {
+            return community.count;
+        }
+
+        return this.getRating(recipeId) ? 1 : 0;
     }
 
     setRating(recipeId, rating) {
@@ -102,8 +153,97 @@ class RatingManager {
     }
 
     getAverageRating(recipeId) {
+        const community = this.getCommunitySummary(recipeId);
+        if (community.count > 0) {
+            return community.average.toFixed(1);
+        }
+
         const rating = this.getRating(recipeId);
         return rating ? rating.toFixed(1) : 'Chưa có đánh giá';
+    }
+
+    getAverageRatingLabel(recipeId) {
+        const average = this.getAverageRating(recipeId);
+        if (average === 'Chưa có đánh giá') {
+            return average;
+        }
+
+        const count = this.getRatingCount(recipeId);
+        const suffix = count === 1 ? 'đánh giá' : 'đánh giá';
+        return `${average}/5 (${count} ${suffix})`;
+    }
+
+    async init() {
+        await this.fetchCommunityRatings();
+    }
+
+    refreshRatingUI() {
+        if (typeof displayRecipes === 'function') {
+            if (typeof filteredRecipes !== 'undefined') {
+                displayRecipes(filteredRecipes);
+            } else if (typeof recipes !== 'undefined') {
+                displayRecipes(recipes);
+            }
+        }
+
+        const recipeModal = document.getElementById('recipeModal');
+        const recipeId = Number(recipeModal?.dataset?.recipeId || 0);
+
+        if (recipeModal && recipeModal.style.display === 'block' && recipeId && typeof recipes !== 'undefined' && typeof openRecipeModal === 'function') {
+            const selectedRecipe = recipes.find(recipe => recipe.id === recipeId);
+            if (selectedRecipe) {
+                openRecipeModal(selectedRecipe);
+            }
+        }
+    }
+
+    async fetchCommunityRatings() {
+        try {
+            const response = await fetch(this.apiBaseUrl);
+            if (!response.ok) {
+                throw new Error(`Ratings API returned ${response.status}`);
+            }
+
+            const data = await response.json();
+            this.communityRatings = data.ratings || {};
+            this.apiAvailable = true;
+            this.refreshRatingUI();
+            return this.communityRatings;
+        } catch (error) {
+            this.apiAvailable = false;
+            console.warn('Ratings API unavailable:', error);
+            return this.communityRatings;
+        }
+    }
+
+    async syncRating(recipeId, rating) {
+        try {
+            const response = await fetch(this.apiBaseUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    recipeId,
+                    rating,
+                    clientId: this.getClientId()
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ratings API returned ${response.status}`);
+            }
+
+            const data = await response.json();
+            this.communityRatings[recipeId] = this.normalizeSummary(data.summary);
+            this.apiAvailable = true;
+            this.refreshRatingUI();
+            return this.communityRatings[recipeId];
+        } catch (error) {
+            this.apiAvailable = false;
+            console.warn('Cannot sync rating to server:', error);
+            return null;
+        }
     }
 }
 
@@ -263,9 +403,11 @@ function toggleFavorite(recipeId, event) {
     }
 }
 
-function setRating(recipeId, rating, event) {
-    event.stopPropagation();
+async function setRating(recipeId, rating, event) {
+    if (event) event.stopPropagation();
     ratingManager.setRating(recipeId, rating);
+    ratingManager.refreshRatingUI();
+    await ratingManager.syncRating(recipeId, rating);
     showToast(`⭐ Bạn đã đánh giá ${rating} sao!`, 'success');
 }
 
@@ -360,4 +502,5 @@ function showCollectionsModal(recipeId) {
 document.addEventListener('DOMContentLoaded', function() {
     initAdvancedSearch();
     favoritesManager.updateUI();
+    ratingManager.init();
 });
