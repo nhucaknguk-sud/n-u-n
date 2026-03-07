@@ -117,12 +117,12 @@ const recipes = [
             "Nước mắm chua, dầu ăn"
         ],
         steps: [
-            "Thịt nạm nướng charm cho nắng và tinh",
-            "Luộc cơm theo cách thôi thường",
-            "Rán trứng ốp la cho chín gấp",
+            "Thịt nạm nướng từng khúc cho nước và tinh",
+            "Luộc cơm theo cách thông thường",
+            "Rán trứng ốp la cho chín vừa",
             "Xếp thịt nạm lên cơm tấm",
             "Thêm trứng ốp la ở bên",
-            "Vân cà chua, ớt và nước mắm chua"
+            "Vãi cà chua, ớt và nước mắm chua lên trên"
         ]
     },
     {
@@ -176,7 +176,7 @@ const recipes = [
             "Nước mắm chua, dầu ăn"
         ],
         steps: [
-            "Nấm và cà rốt thái sợi và trần",
+            "Nấm và cà rốt thái sợi và sơ",
             "Trộn thịt, tôm, giá, nấm, cà rốt",
             "Nêm nước mắm, muối và tiêu",
             "Cuốn hỗn hợp vào bánh tráng",
@@ -193,7 +193,7 @@ const recipes = [
         emoji: "🥒",
         image: "https://images.unsplash.com/photo-1585032226651-759b98d7afd4?w=500&h=500&fit=crop",
         video: "https://www.youtube.com/embed/Y0dOUqj8EpE",
-        description: "Gỏi cuốn là món khai vị làm lạnh tươi mát lâm",
+        description: "Gỏi cuốn là món khai vị làm lạnh tươi mát lạm",
         time: "30 phút",
         difficulty: "Dễ",
         serves: "4 người",
@@ -209,7 +209,7 @@ const recipes = [
             "Bánh tráng ngâm nước ấm cho mềm",
             "Tôm và thịt cắt sợi dài",
             "Xếp bánh tráng lên mặt phẳng",
-            "Xếp tôm, thịt, giá, rau thơm lên đó",
+            "Xếp tôm, thịt, giá, rau thơm lên trên",
             "Cuốn lại theo hình cầu lồi",
             "Cắt đôi sau khi cuốn xong",
             "Xếp đẹp trên đĩa, ăn kèm với nước mắm chua"
@@ -361,7 +361,7 @@ const recipes = [
             "Bún tươi, rau thơm"
         ],
         steps: [
-            "Cá lóc được làm sạch, bỏ gai và hạt",
+            "Cá lóc được làm sạch, bỏ gai và xương",
             "Cá được trộn với mắm tôm, cà chua à o",
             "Hành gừng thái mỏng để tăng mùi thơm",
             "Nướng cá trong chảo nóng với dầu ăn",

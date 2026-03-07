@@ -77,10 +77,17 @@ class AIAdvisor {
             let response = null;
             let useBackend = false;
 
-            // Try backend for non-localhost environments
-            if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+            // Try backend first (localhost or with specified backend URL)
+            if (typeof window !== 'undefined') {
                 try {
-                    const backendUrl = `${window.location.protocol}//${window.location.hostname}:3000/api/chat`;
+                    // Determine backend URL
+                    let backendUrl = 'http://localhost:3000/api/chat';
+                    
+                    // For non-localhost environments, try same hostname
+                    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+                        backendUrl = `${window.location.protocol}//${window.location.hostname}:3000/api/chat`;
+                    }
+                    
                     const backendResponse = await fetch(backendUrl, {
                         method: 'POST',
                         headers: {
@@ -93,9 +100,10 @@ class AIAdvisor {
                     if (backendResponse.ok) {
                         response = backendResponse;
                         useBackend = true;
+                        console.log('✅ Using backend API');
                     }
                 } catch (e) {
-                    console.log('Backend not available');
+                    console.log('⚠️ Backend not available, will try direct API or fallback');
                 }
             }
 
