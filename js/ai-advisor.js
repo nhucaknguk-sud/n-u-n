@@ -54,6 +54,7 @@ class AIAdvisor {
 
         this.isLoading = true;
         let timeoutId = null;
+        const controller = new AbortController();
         
         try {
             // Add user message to history
@@ -68,12 +69,10 @@ class AIAdvisor {
                 ...this.conversationHistory
             ];
 
-            // ⚡ Create fetch with timeout
-            const controller = new AbortController();
-            timeoutId = setTimeout(
-                () => controller.abort(),
-                AI_CONFIG.timeout || 15000
-            );
+            // ⚡ Create fetch with timeout (increased to 30s)
+            timeoutId = setTimeout(() => {
+                controller.abort();
+            }, AI_CONFIG.timeout || 30000);
 
             let response = null;
             let useBackend = false;
@@ -122,7 +121,9 @@ class AIAdvisor {
 
             if (!response.ok) {
                 const error = await response.json();
+                if (timeoutId) clearTimeout(timeoutId);
                 console.error('API Error:', error);
+                this.isLoading = false;
                 
                 // ⚡ Ngắn gọn error messages
                 if (response.status === 401) {
@@ -143,25 +144,32 @@ class AIAdvisor {
             if (data.choices && data.choices[0] && data.choices[0].message) {
                 aiMessage = data.choices[0].message.content;
             } else if (data.error) {
+                if (timeoutId) clearTimeout(timeoutId);
+                this.isLoading = false;
                 return '❌ Lỗi AI';
             } else {
+                if (timeoutId) clearTimeout(timeoutId);
+                this.isLoading = false;
                 return '❌ Lỗi';
             }
             
             // Add AI response to history
             this.addMessage('assistant', aiMessage);
             
+            if (timeoutId) clearTimeout(timeoutId);
             this.isLoading = false;
             return aiMessage;
 
         } catch (error) {
             if (timeoutId) clearTimeout(timeoutId);
-            console.error('Error:', error);
             this.isLoading = false;
+            
+            console.error('Error details:', error.name, error.message);
             
             // ⚡ Ngắn gọn error messages
             if (error.name === 'AbortError') {
-                return '⏱️ Hết thời gian! Mạng quá chậm!';
+                console.log('Request timeout - network too slow or backend unavailable');
+                return '⏱️ Hết thời gian! Mạng quá chậm hoặc backend không chạy';
             }
             
             return '😅 Lỗi. Thử lại!';
@@ -196,7 +204,7 @@ class AIAdvisor {
     }
 
     // Get loading status
-    isLoading() {
+    getIsLoading() {
         return this.isLoading;
     }
 }
