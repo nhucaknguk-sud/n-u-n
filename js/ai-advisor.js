@@ -12,23 +12,17 @@ class AIAdvisor {
     generateRecipeSummary() {
         if (typeof recipes === 'undefined') return '';
         
-        const recipeList = recipes.map(r => 
-            `- ${r.title} (${r.difficulty}, ${r.time}): ${r.description}`
-        ).join('\n');
+        // ⚡ Rút gọn recipe summary để giảm tokens
+        const recipeList = recipes.slice(0, 5).map(r => 
+            `${r.title}`
+        ).join(', ');
 
-        return `\nServerbot hiện có những công thức nấu ăn sau:\n${recipeList}`;
+        return `\nCông thức: ${recipeList}...`;
     }
 
     // Build context for the AI to understand the website
     getContextMessage() {
-        return `Bạn là một trợ lý nấu ăn AI cho website "Nấu Ăn Việt" chuyên cung cấp công thức nấu ăn truyền thống Việt Nam.
-${this.recipeSummary}
-
-Luôn trả lời bằng Tiếng Việt, vui vẻ và hữu ích. 
-Khi người dùng hỏi về một công thức, gợi ý chi tiết và mẹo nấu ăn.
-Khi được hỏi tạo công thức từ nguyên liệu, hãy sáng tạo nhưng thực tế.
-Giữ câu trả lời ngắn gọn (2-3 đoạn) nhưng đầy đủ thông tin.
-Luôn sử dụng emoji phù hợp để làm cuộc hội thoại vui vẻ hơn.`;
+        return AI_CONFIG.systemPrompt + this.recipeSummary;
     }
 
     // Add message to conversation history
@@ -37,9 +31,9 @@ Luôn sử dụng emoji phù hợp để làm cuộc hội thoại vui vẻ hơn
             role: role,
             content: content
         });
-        // Keep only last 10 messages to avoid context length issues
-        if (this.conversationHistory.length > 10) {
-            this.conversationHistory = this.conversationHistory.slice(-10);
+        // ⚡ Keep only last 5 messages to reduce tokens & speed up
+        if (this.conversationHistory.length > 5) {
+            this.conversationHistory = this.conversationHistory.slice(-5);
         }
     }
 
@@ -55,12 +49,13 @@ Luôn sử dụng emoji phù hợp để làm cuộc hội thoại vui vẻ hơn
         }
 
         this.isLoading = true;
+        let timeoutId = null;
         
         try {
             // Add user message to history
             this.addMessage('user', userMessage);
 
-            // Prepare messages for API
+            // Prepare messages for API (optimized)
             const messages = [
                 {
                     role: 'system',
@@ -69,13 +64,18 @@ Luôn sử dụng emoji phù hợp để làm cuộc hội thoại vui vẻ hơn
                 ...this.conversationHistory
             ];
 
-            // Try backend first, then fallback to direct API
+            // ⚡ Create fetch with timeout
+            const controller = new AbortController();
+            timeoutId = setTimeout(
+                () => controller.abort(),
+                AI_CONFIG.timeout || 15000
+            );
+
             let response = null;
             let useBackend = false;
 
-            // Check if backend is available
+            // Try backend for non-localhost environments
             if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-                // Try backend for non-localhost environments
                 try {
                     const backendUrl = `${window.location.protocol}//${window.location.hostname}:3000/api/chat`;
                     const backendResponse = await fetch(backendUrl, {
@@ -83,7 +83,8 @@ Luôn sử dụng emoji phù hợp để làm cuộc hội thoại vui vẻ hơn
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ messages: messages })
+                        body: JSON.stringify({ messages: messages }),
+                        signal: controller.signal
                     });
 
                     if (backendResponse.ok) {
@@ -91,12 +92,11 @@ Luôn sử dụng emoji phù hợp để làm cuộc hội thoại vui vẻ hơn
                         useBackend = true;
                     }
                 } catch (e) {
-                    // Backend not available, will try direct API
-                    console.log('Backend not available, using direct API call');
+                    console.log('Backend not available');
                 }
             }
 
-            // If backend not used or not available, try direct API
+            // If backend not used, try direct API
             if (!useBackend) {
                 response = await fetch('https://api.openai.com/v1/chat/completions', {
                     method: 'POST',
@@ -109,38 +109,39 @@ Luôn sử dụng emoji phù hợp để làm cuộc hội thoại vui vẻ hơn
                         messages: messages,
                         max_tokens: AI_CONFIG.maxTokens,
                         temperature: AI_CONFIG.temperature
-                    })
+                    }),
+                    signal: controller.signal
                 });
             }
+
+            if (timeoutId) clearTimeout(timeoutId);
 
             if (!response.ok) {
                 const error = await response.json();
                 console.error('API Error:', error);
                 
-                // Handle specific errors
+                // ⚡ Ngắn gọn error messages
                 if (response.status === 401) {
-                    return '⚠️ API key không hợp lệ. Vui lòng kiểm tra lại config.js';
+                    return '❌ API key sai. Cập nhật config.js';
                 } else if (response.status === 429) {
-                    return '⏱️ Quá nhiều yêu cầu. Hãy chờ vài giây rồi thử lại!';
+                    return '⏱️ Quá nhiều. Chờ xíu!';
                 } else if (response.status === 500) {
-                    return '🔧 OpenAI có lỗi tạm thời. Vui lòng thử lại sau!';
-                } else if (response.status === 403) {
-                    return '🚫 Truy cập bị từ chối. Hãy kiểm tra API key và quyền truy cập.';
+                    return '🔧 OpenAI bị lỗi. Thử lại!';
                 }
                 
-                return '😅 Có lỗi kết nối. Vui lòng kiểm tra Internet và thử lại!';
+                return '😅 Lỗi. Thử lại!';
             }
 
             const data = await response.json();
             
-            // Handle both direct API and backend response formats
+            // Handle response
             let aiMessage = '';
             if (data.choices && data.choices[0] && data.choices[0].message) {
                 aiMessage = data.choices[0].message.content;
             } else if (data.error) {
-                return `⚠️ Lỗi: ${data.error}`;
+                return '❌ Lỗi AI';
             } else {
-                return '❌ Không thể xử lý phản hồi từ AI';
+                return '❌ Lỗi';
             }
             
             // Add AI response to history
@@ -150,15 +151,16 @@ Luôn sử dụng emoji phù hợp để làm cuộc hội thoại vui vẻ hơn
             return aiMessage;
 
         } catch (error) {
+            if (timeoutId) clearTimeout(timeoutId);
             console.error('Error:', error);
             this.isLoading = false;
             
-            // Provide helpful error messages
-            if (error.message.includes('Failed to fetch')) {
-                return '🌐 Lỗi kết nối. Kiểm tra Internet hoặc CORS settings.';
+            // ⚡ Ngắn gọn error messages
+            if (error.name === 'AbortError') {
+                return '⏱️ Hết thời gian! Mạng quá chậm!';
             }
             
-            return '😅 Có lỗi xảy ra. Hãy kiểm tra kết nối Internet và thử lại!';
+            return '😅 Lỗi. Thử lại!';
         }
     }
 

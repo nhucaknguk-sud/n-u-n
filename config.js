@@ -2,15 +2,12 @@
 const AI_CONFIG = {
     apiKey: 'sk-your-api-key-here', // Replace with your OpenAI API key
     apiModel: 'gpt-3.5-turbo',
-    maxTokens: 500,
-    temperature: 0.7,
-    systemPrompt: `Bạn là một trợ lý nấu ăn AI chuyên về các món ăn truyền thống Việt Nam.
-Bạn là một chuyên gia nấu ăn thân thiện, hài hước và hữu ích.
-Luôn trả lời bằng Tiếng Việt.
-Khi người dùng hỏi về một công thức, hãy cung cấp lời khuyên chi tiết, mẹo nấu ăn, và các biến thể.
-Khi được hỏi tạo công thức mới, hãy sáng tạo nhưng cần thực tế.
-Luôn bao gồm các emoji thích hợp để làm cho cuộc trò chuyện vui vẻ hơn.
-Giữ các câu trả lời tương đối ngắn gọn (2-3 đoạn), nhưng đầy đủ thông tin.`
+    maxTokens: 250,                 // ⚡ Giảm từ 500 → 250 (trả lời nhanh hơn)
+    temperature: 0.5,               // ⚡ Giảm từ 0.7 → 0.5 (nhanh hơn)
+    timeout: 15000,                 // ⚡ Timeout 15 giây (tránh chờ quá lâu)
+    systemPrompt: `Bạn là trợ lý nấu ăn AI chuyên về Việt Nam.
+Trả lời NGẮN, NHANH, TRỰC TIẾP (2-3 câu tối đa).
+Luôn dùng Tiếng Việt. Dùng emoji. Giữ câu trả lời dưới 150 từ.`
 };
 
 // Utility function to check if API key is configured
