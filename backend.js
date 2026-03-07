@@ -113,7 +113,9 @@ app.use((err, req, res, next) => {
         details: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
-
+app.get("/", (req, res) => {
+  res.send("AI backend đang chạy OK");
+});
 // Start server
 app.listen(PORT, () => {
     console.log(`
