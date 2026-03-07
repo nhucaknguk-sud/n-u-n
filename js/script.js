@@ -5,7 +5,7 @@ const recipes = [
         title: "Phở Bò",
         category: "canh",
         emoji: "🍜",
-        image: "https://images.unsplash.com/photo-1582878657708-bc07aa60bd45?w=500&h=500&fit=crop",
+        image: "images/pho-bo.jpg",
         video: "https://www.youtube.com/embed/cZtoFQXsmls",
         description: "Phở bò là món canh truyền thống của Việt Nam với nước dùng đậm đà",
         time: "3 giờ",
