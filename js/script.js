@@ -6,7 +6,7 @@ const recipes = [
         category: "canh",
         emoji: "🍜",
         image: "images/pho-bo.jpg",
-        video: "https://www.youtube.com/embed/cZtoFQXsmls",
+        video: "https://www.youtube.com/watch?v=c9GfHgMk1ac",
         description: "Phở bò là món canh truyền thống của Việt Nam với nước dùng đậm đà",
         time: "3 giờ",
         difficulty: "Trung bình",
@@ -2064,17 +2064,61 @@ function openVideoModal(videoUrl, event) {
         event.preventDefault();
         event.stopPropagation();
     }
+
+    const embedUrl = normalizeVideoUrl(videoUrl);
+    if (!embedUrl) {
+        return;
+    }
     
     const modal = document.getElementById('videoModal');
     const videoContainer = document.getElementById('videoContainer');
     
     videoContainer.innerHTML = `
-        <iframe width="100%" height="500" src="${videoUrl}?autoplay=1" 
+        <iframe width="100%" height="500" src="${embedUrl}" 
                 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
     `;
     
     modal.style.display = 'block';
+}
+
+function normalizeVideoUrl(videoUrl) {
+    if (!videoUrl) {
+        return '';
+    }
+
+    try {
+        const url = new URL(videoUrl, window.location.origin);
+        const host = url.hostname.replace(/^www\./, '');
+        let embedUrl = videoUrl;
+
+        if (host === 'youtube.com' || host === 'm.youtube.com') {
+            if (url.pathname === '/watch') {
+                const videoId = url.searchParams.get('v');
+                if (videoId) {
+                    embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                }
+            } else if (url.pathname.startsWith('/embed/')) {
+                embedUrl = `https://www.youtube.com${url.pathname}`;
+            } else if (url.pathname.startsWith('/shorts/')) {
+                const videoId = url.pathname.split('/')[2];
+                if (videoId) {
+                    embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                }
+            }
+        } else if (host === 'youtu.be') {
+            const videoId = url.pathname.slice(1);
+            if (videoId) {
+                embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            }
+        }
+
+        const separator = embedUrl.includes('?') ? '&' : '?';
+        return `${embedUrl}${separator}autoplay=1`;
+    } catch {
+        const separator = videoUrl.includes('?') ? '&' : '?';
+        return `${videoUrl}${separator}autoplay=1`;
+    }
 }
 
 // Close Video Modal
