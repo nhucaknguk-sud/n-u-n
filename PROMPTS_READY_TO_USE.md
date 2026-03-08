@@ -236,6 +236,9 @@ food magazine quality, 4K resolution, appetizing food styling
 ### Video Prompts cho Mỗi Món (Direct)
 
 #### **PHỞ BÒ - Video Prompt:**
+
+Video tham khảo: https://www.youtube.com/watch?v=c9GfHgMk1ac
+
 ```
 Professional Vietnamese pho bo cooking video, 45 seconds:
 - Start: Stunning bowl of pho with steam
