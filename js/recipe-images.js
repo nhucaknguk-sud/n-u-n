@@ -1,13 +1,32 @@
 /**
- * Vietnamese Recipes Image URLs
- * Mapping recipes with specific food images that match each dish
+ * Vietnamese recipe images.
+ * Local files in images/ are preferred so image swaps only require replacing files.
  */
+
+const localRecipeImages = {
+    1: "images/pho-bo.jpg",
+    2: "images/banh-trung.png",
+    3: "images/bun-rieu.png",
+    4: "images/com-tam-sai-gon.png",
+    5: "images/oc-nuong-muoi-ot.png",
+    6: "images/nem-ran.png",
+    7: "images/goi-quan.png",
+    8: "images/che-den.png",
+    9: "images/bun-bo-hue.png",
+    10: "images/com-chien-duong-chau.png",
+    11: "images/mi-quang.png",
+    12: "images/cha-ca-la-vong.png",
+    13: "images/canh-chua.png",
+    14: "images/banh-mi.png",
+    15: "images/lau-thai.png",
+    16: "images/tau-hu-nuoc-duong.png"
+};
 
 const recipeImages = {
     // Vietnamese Noodle Soups & Broths
-    1: "images/pho-bo.jpg", // Phở Bò
-    3: "images/bun-rieu.png", // Bún Riêu
-    9: "images/bun-bo-hue.png", // Bún Bò Huế
+    1: localRecipeImages[1], // Phở Bò
+    3: localRecipeImages[3], // Bún Riêu
+    9: localRecipeImages[9], // Bún Bò Huế
     11: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Mì Quảng
     13: "https://images.unsplash.com/photo-1612874742237-6526221fcb3b?w=500&h=500&fit=crop", // Canh Dưa Chua Cá
     15: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Lẩu Thái
@@ -23,9 +42,9 @@ const recipeImages = {
     62: "https://images.unsplash.com/photo-1629521667-d74e55e93d50?w=500&h=500&fit=crop", // Canh Dền
 
     // Rice & Rice Dishes
-    2: "images/banh-trung.png", // Bánh Chưng
-    4: "images/com-tam-sai-gon.png", // Cơm Tấm Sài Gòn
-    10: "images/com-chien-duong-chau.png", // Cơm Chiên Dương Châu
+    2: localRecipeImages[2], // Bánh Chưng
+    4: localRecipeImages[4], // Cơm Tấm Sài Gòn
+    10: localRecipeImages[10], // Cơm Chiên Dương Châu
     14: "https://images.unsplash.com/photo-1616271062365-3de33a1be3eb?w=500&h=500&fit=crop", // Cơm Cháy Tôm
     22: "https://images.unsplash.com/photo-1603894542802-f03eed1e6c7d?w=500&h=500&fit=crop", // Cơm Cháy Tôm
     29: "https://images.unsplash.com/photo-1616271062365-3de33a1be3eb?w=500&h=500&fit=crop", // Cơm Cá Trích
@@ -41,7 +60,7 @@ const recipeImages = {
     51: "https://images.unsplash.com/photo-1609834902200-03ee94b1b909?w=500&h=500&fit=crop", // Bánh Hoai Cuốn
 
     // Fish & Seafood Dishes
-    5: "images/oc-nuong-muoi-ot.png", // Mốc Nướng Muối Ớt
+    5: localRecipeImages[5], // Mốc Nướng Muối Ớt
     18: "https://images.unsplash.com/photo-1604958259407-9f58f73f0354?w=500&h=500&fit=crop", // Lẩu Cua Cà Chua
     28: "https://images.unsplash.com/photo-1551116328-4991713235d9?w=500&h=500&fit=crop", // Mực Nướng Mỡ Hành
     40: "https://images.unsplash.com/photo-1551116328-4991713235d9?w=500&h=500&fit=crop", // Mò Nướng Muối Ớt
@@ -52,7 +71,7 @@ const recipeImages = {
     58: "https://images.unsplash.com/photo-1595521624815-90bb28b1e2b9?w=500&h=500&fit=crop", // Cá Kho Tiêu
 
     // Grilled & Roasted Meats
-    6: "images/nem-ran.png", // Nem Rán
+    6: localRecipeImages[6], // Nem Rán
     16: "https://images.unsplash.com/photo-1639533635651-8c4e1f46c0ba?w=500&h=500&fit=crop", // Tôm Cốc Tắc
     17: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&h=500&fit=crop", // Bò Nướng Lá Chanh
     23: "https://images.unsplash.com/photo-1482769557014-da9dd8fac0a6?w=500&h=500&fit=crop", // Thịt Kho Tàu
@@ -70,7 +89,7 @@ const recipeImages = {
     67: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&h=500&fit=crop", // Bò Xào Hành Tây
 
     // Fresh Rolls & Salads
-    7: "images/goi-quan.png", // Gỏi Cuốn
+    7: localRecipeImages[7], // Gỏi Cuốn
     26: "https://images.unsplash.com/photo-1604899573693-2c1b6c6c6c6?w=500&h=500&fit=crop", // Gỏi Cá Sống
     34: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=500&fit=crop", // Rau Muống Xào Tỏi
     38: "https://images.unsplash.com/photo-1604899573693-2c1b6c6c6c6?w=500&h=500&fit=crop", // Gỏi Đu Đủ
@@ -84,11 +103,13 @@ const recipeImages = {
     60: "https://images.unsplash.com/photo-1585589137ac11ff26f1b6d79f00e5f0e8f5f5f?w=500&h=500&fit=crop", // Trứng Cuốn Nước Mắm
 
     // Desserts & Beverages
-    8: "images/che-den.png", // Chè Đen
+    8: localRecipeImages[8], // Chè Đen
     16: "https://images.unsplash.com/photo-1563805042-7684c019e157?w=500&h=500&fit=crop", // Tàu Hủ Nước Đường
     17: "https://images.unsplash.com/photo-1585589137ac11ff26f1b6d79f00e5f0e8f5f5f?w=500&h=500&fit=crop", // Bánh Tráng Nướng Me
     68: "https://images.unsplash.com/photo-1563805042-7684c019e157?w=500&h=500&fit=crop" // Chè Sắn Dây
 };
+
+Object.assign(recipeImages, localRecipeImages);
 
 /**
  * Apply recipe images

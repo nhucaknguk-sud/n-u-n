@@ -13,16 +13,14 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const {
-    readRatingsStore,
-    writeRatingsStore,
-    summarizeRatings
-} = require('./lib/ratings-store');
+const fs = require('fs/promises');
+const path = require('path');
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ratingsFilePath = path.join(__dirname, 'data', 'ratings.json');
 
 // Middleware
 app.use(cors());
@@ -33,6 +31,42 @@ app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
     next();
 });
+
+async function ensureRatingsStore() {
+    await fs.mkdir(path.dirname(ratingsFilePath), { recursive: true });
+
+    try {
+        await fs.access(ratingsFilePath);
+    } catch {
+        await fs.writeFile(ratingsFilePath, '{}', 'utf8');
+    }
+}
+
+async function readRatingsStore() {
+    await ensureRatingsStore();
+    const raw = await fs.readFile(ratingsFilePath, 'utf8');
+    return raw ? JSON.parse(raw) : {};
+}
+
+async function writeRatingsStore(ratings) {
+    await ensureRatingsStore();
+    await fs.writeFile(ratingsFilePath, JSON.stringify(ratings, null, 2), 'utf8');
+}
+
+function summarizeRatings(ratings) {
+    return Object.fromEntries(
+        Object.entries(ratings).map(([recipeId, details]) => {
+            const count = Number(details.count || 0);
+            const total = Number(details.total || 0);
+            const average = count > 0 ? total / count : 0;
+
+            return [recipeId, {
+                average: Number(average.toFixed(1)),
+                count
+            }];
+        })
+    );
+}
 
 // Health check endpoint
 app.get('/health', (req, res) => {
