@@ -29,7 +29,15 @@ const localRecipeImages = {
     23: "images/thit-kho-tau.png",
     24: "images/tom-coc-tac.png",
     25: "images/bo-nuong-la-chanh.png",
-    26: "images/goi-ca-song.png"
+    26: "images/goi-ca-song.png",
+    27: "images/goi-buoi.png",
+    28: "images/muc-nuong-mo-hanh.png",
+    30: "images/bun-cha-ha-noi.png",
+    31: "images/tiet-canh.png",
+    32: "images/ga-luoc-mam-tom.png",
+    34: "images/rau-muong-sao-toi.png",
+    35: "images/cua-rang-me.png",
+    37: "images/canh-suon-nau-chua.png"
 };
 
 const recipeImages = {
