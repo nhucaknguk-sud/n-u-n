@@ -54,9 +54,9 @@ const recipeImages = {
     53: "https://images.unsplash.com/photo-1603894542802-f03eed1e6c7d?w=500&h=500&fit=crop", // Cơm Chiên Kiểu Thái
     66: "https://images.unsplash.com/photo-1603894542802-f03eed1e6c7d?w=500&h=500&fit=crop", // Cơm Cà Chua Tôi
 
-    // Special Banh Hoai
+    // Special Banh Khoai
     12: "https://images.unsplash.com/photo-1609834902200-03ee94b1b909?w=500&h=500&fit=crop", // Bánh Hoai
-    20: "https://images.unsplash.com/photo-1609834902200-03ee94b1b909?w=500&h=500&fit=crop", // Bánh Hoai Hội An
+    20: "https://images.unsplash.com/photo-1609834902200-03ee94b1b909?w=500&h=500&fit=crop", // Bánh Khoai Hội An
     51: "https://images.unsplash.com/photo-1609834902200-03ee94b1b909?w=500&h=500&fit=crop", // Bánh Hoai Cuốn
 
     // Fish & Seafood Dishes
