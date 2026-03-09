@@ -1022,31 +1022,6 @@ const recipes = [
         ]
     },
     {
-        id: 43,
-        title: "Tôm Bốc Cháy",
-        category: "mặn",
-        emoji: "🦐",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/watch?v=Xq8GAqmJWt8",
-        description: "Tôm bốc cháy ngoài giòn trong mềm",
-        time: "30 phút",
-        difficulty: "Trung bình",
-        serves: "3 người",
-        ingredients: [
-            "400g tôm",
-            "100g hành",
-            "2 thìa nước mắm",
-            "1 thìa đường",
-            "Dầu ăn"
-        ],
-        steps: [
-            "Rán tôm cho đỏ",
-            "Thêm hành",
-            "Tưới nước mắm",
-            "Đảo nhanh"
-        ]
-    },
-    {
         id: 44,
         title: "Cá Nướng Riềng",
         category: "mặn",
