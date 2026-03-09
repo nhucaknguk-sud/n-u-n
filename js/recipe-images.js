@@ -23,7 +23,13 @@ const localRecipeImages = {
     17: "images/banh-trang-luong-me.png",
     18: "images/lau-ca-chua.png",
     19: "images/mi-van-thanh.png",
-    20: "images/banh-khoai-hoi-an.png"
+    20: "images/banh-khoai-hoi-an.png",
+    21: "images/canh-dua-chua-ca.png",
+    22: "images/com-chay-tom.png",
+    23: "images/thit-kho-tau.png",
+    24: "images/tom-coc-tac.png",
+    25: "images/bo-nuong-la-chanh.png",
+    26: "images/goi-ca-song.png"
 };
 
 const recipeImages = {
@@ -36,7 +42,7 @@ const recipeImages = {
     15: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Lẩu Thái
     19: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Tô Mì Vằn Thắn
     21: "https://images.unsplash.com/photo-1612874742237-6526221fcb3b?w=500&h=500&fit=crop", // Canh Dưa Chua Cá
-    27: "https://images.unsplash.com/photo-1612874742237-6526221fcb3b?w=500&h=500&fit=crop", // Canh Bưởi Tôm
+    27: "https://images.unsplash.com/photo-1604899573693-2c1b6c6c6c6?w=500&h=500&fit=crop", // Gỏi Bưởi
     30: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Bún Chả Hà Nội
     37: "https://images.unsplash.com/photo-1629521667-d74e55e93d50?w=500&h=500&fit=crop", // Canh Sườn Nấu Chua
     41: "https://images.unsplash.com/photo-1612874742237-6526221fcb3b?w=500&h=500&fit=crop", // Canh Tao Tằm

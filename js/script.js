@@ -774,29 +774,34 @@ const recipes = [
     },
     {
         id: 27,
-        title: "Canh Bưởi Tôm",
-        category: "canh",
-        emoji: "🍲",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
+        title: "Gỏi Bưởi",
+        category: "chay",
+        emoji: "🥗",
+        image: "https://images.unsplash.com/photo-1604899573693-2c1b6c6c6c6?w=500&h=500&fit=crop",
         video: "https://www.youtube.com/embed/pX24LoEEn8s",
-        description: "Canh bưởi tôm chua chua ngon",
-        time: "1 giờ",
-        difficulty: "Trung bình",
+        description: "Gỏi bưởi là món khai vị thanh mát với vị chua ngọt nhẹ và hương thơm tự nhiên",
+        time: "30 phút",
+        difficulty: "Dễ",
         serves: "4 người",
         ingredients: [
-            "300g tôm",
-            "200g bưởi",
-            "50g riềng",
-            "500ml nước dùng",
+            "1 quả bưởi vừa",
+            "1 củ cà rốt",
+            "1/2 củ hành tây",
+            "1 nắm rau răm",
+            "50g đậu phộng rang",
             "2 thìa nước mắm",
-            "Hành, tỏi"
+            "1 thìa đường",
+            "1 quả chanh",
+            "1 quả ớt"
         ],
         steps: [
-            "Nấu nước dùng từ xương tôm",
-            "Thêm riềng nấu",
-            "Cho tôm vào nấu",
-            "Thêm bưởi cắt khúc",
-            "Nêm nước mắm vừa ăn"
+            "Tách múi bưởi, bỏ hạt và xé thành miếng vừa ăn",
+            "Cà rốt bào sợi, hành tây thái mỏng rồi ngâm nước đá cho bớt hăng",
+            "Pha nước trộn gồm nước mắm, đường, nước cốt chanh và ớt băm",
+            "Cho bưởi, cà rốt và hành tây vào tô lớn rồi rưới nước trộn lên",
+            "Trộn nhẹ tay để bưởi không bị nát",
+            "Thêm rau răm và đậu phộng rang trước khi dùng",
+            "Bày ra đĩa và dùng ngay khi còn tươi"
         ]
     },
     {
