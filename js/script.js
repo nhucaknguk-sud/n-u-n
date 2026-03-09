@@ -694,12 +694,12 @@ const recipes = [
     },
     {
         id: 24,
-        title: "Tôm Cốc Tắc",
+        title: "Tôm Sốt Thái",
         category: "mặn",
         emoji: "🦐",
         image: "images/tom-coc-tac.png",
         video: "https://www.youtube.com/watch?v=FY5eRvndU54",
-        description: "Tôm cốc tắc là món hải sản đậm vị với vị chua cay mặn ngọt rất bắt miệng",
+        description: "Tôm sốt Thái là món hải sản đậm vị với vị chua cay mặn ngọt rất bắt miệng",
         time: "30 phút",
         difficulty: "Dễ",
         serves: "3 người",
@@ -891,12 +891,12 @@ const recipes = [
     },
     {
         id: 32,
-        title: "Gà Luộc Mắm Tôm",
+        title: "Gà Hấp Nước Mắm",
         category: "mặn",
         emoji: "🍗",
         image: "images/ga-luoc-mam-tom.png",
         video: "https://www.youtube.com/watch?v=WcijG7yBBYM",
-        description: "Gà luộc mắm tôm ngon hẹp",
+        description: "Gà hấp nước mắm đậm đà, thơm ngon",
         time: "1 giờ",
         difficulty: "Dễ",
         serves: "4 người",
@@ -1074,28 +1074,30 @@ const recipes = [
     },
     {
         id: 45,
-        title: "Mốc Hấp Miso",
-        category: "mặn",
-        emoji: "🐚",
-        image: "images/oc-hap-miso.png",
+        title: "Rau Củ Hấp Chấm Miso",
+        category: "chay",
+        emoji: "🥦",
+        image: "images/rau-cu-luoc-cham-miso.png",
         video: "https://www.youtube.com/watch?v=TWfnup1TMiU",
-        description: "Mốc hấp miso ngon lạ",
+        description: "Rau củ hấp chấm miso thanh nhẹ, dễ ăn và đậm vị",
         time: "30 phút",
         difficulty: "Dễ",
         serves: "3 người",
         ingredients: [
-            "400g mốc",
+            "200g bông cải",
+            "150g cà rốt",
+            "150g bắp non",
             "2 thìa miso",
-            "100ml nước dùng",
-            "1 cây hành",
-            "Gừng"
+            "1 thìa mè rang",
+            "1 thìa nước tương",
+            "1 thìa đường"
         ],
         steps: [
-            "Mốc rửa sạch",
-            "Hơi miso với nước dùng",
-            "Cho mốc vào",
-            "Hấp 15 phút",
-            "Rắc hành gừng"
+            "Rau củ rửa sạch, cắt miếng vừa ăn",
+            "Hấp rau củ khoảng 10-15 phút đến khi vừa chín",
+            "Khuấy miso với nước tương và đường cho đều",
+            "Rắc mè rang lên chén sốt miso",
+            "Dọn rau củ hấp kèm chén miso để chấm"
         ]
     },
     {
@@ -1227,18 +1229,18 @@ const recipes = [
     },
     {
         id: 55,
-        title: "Thịt Nướng Cuốn Lá Lý",
+        title: "Bò Quấn Lá Lốt",
         category: "mặn",
         emoji: "🌿",
         image: "images/thit-nuong-cuon-la-ly.png",
-        video: "https://www.youtube.com/watch?v=w5E6Xf4DsKQ",
-        description: "Thịt nướng cuốn lá lý thơm",
+        video: "https://www.youtube.com/watch?v=mbU1T5qlVm4",
+        description: "Bò quấn lá lốt thơm lừng, đậm vị",
         time: "45 phút",
         difficulty: "Dễ",
         serves: "4 người",
         ingredients: [
-            "400g thịt lợn nạm",
-            "10 lá lý",
+            "400g thịt bò",
+            "10 lá lốt",
             "3 thìa nước mắm",
             "2 quả ớt",
             "Tỏi"
@@ -1246,7 +1248,7 @@ const recipes = [
         steps: [
             "Cắt thịt mỏng",
             "Trộn với gia vị",
-            "Cuốn bằng lá lý",
+            "Cuốn bằng lá lốt",
             "Nướng trên lửa"
         ]
     },
@@ -1379,17 +1381,17 @@ const recipes = [
     },
     {
         id: 62,
-        title: "Canh Dền",
+        title: "Canh Rau Dền",
         category: "canh",
         emoji: "🍲",
         image: "images/canh-den.png",
-        video: "https://www.youtube.com/watch?v=hTpDrv19ZeU",
-        description: "Canh dền ngon bổ dưỡng",
+        video: "https://www.youtube.com/watch?v=Wt56ugFoexI",
+        description: "Canh rau dền thanh mát, ngon bổ dưỡng",
         time: "1 giờ",
         difficulty: "Dễ",
         serves: "4 người",
         ingredients: [
-            "300g dền",
+            "300g rau dền",
             "200g thịt lợn",
             "500ml nước dùng",
             "2 thìa nước mắm",
@@ -1398,7 +1400,7 @@ const recipes = [
         steps: [
             "Nấu nước dùng",
             "Hạ thịt vào",
-            "Thêm dền",
+            "Thêm rau dền",
             "Nấu cho mềm",
             "Nêm gia vị"
         ]
