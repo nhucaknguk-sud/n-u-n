@@ -1804,6 +1804,12 @@ function normalizeVideoUrl(videoUrl) {
 // Close Video Modal
 function closeVideoModal() {
     const modal = document.getElementById('videoModal');
+    const videoContainer = document.getElementById('videoContainer');
+
+    if (videoContainer) {
+        videoContainer.innerHTML = '';
+    }
+
     modal.style.display = 'none';
 }
 
@@ -1815,7 +1821,7 @@ window.onclick = function(event) {
         modal.style.display = 'none';
     }
     if (event.target == videoModal) {
-        videoModal.style.display = 'none';
+        closeVideoModal();
     }
 }
 
