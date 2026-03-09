@@ -551,12 +551,12 @@ const recipes = [
     },
     {
         id: 19,
-        title: "Tô Mì Vằn Thắn",
+        title: "Mì Hoành Thắn",
         category: "canh",
         emoji: "🍝",
         image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=500&h=500&fit=crop",
         video: "https://www.youtube.com/embed/qN-vYaNeGaI",
-        description: "Mì vằn thắn là món mì truyền thống từ Huế",
+        description: "Mì hoành thắn là món mì quen thuộc với nước dùng thanh và phần nhân đậm vị",
         time: "1 giờ",
         difficulty: "Trung bình",
         serves: "2 người",
@@ -694,28 +694,32 @@ const recipes = [
     },
     {
         id: 24,
-        title: "Tôm Cốc Tắc",
+        title: "Tôm Sốt Thái",
         category: "mặn",
         emoji: "🦐",
         image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
         video: "https://www.youtube.com/embed/lXfPRQR0Q_w",
-        description: "Tôm cốc tắc ngon ngạt hương",
+        description: "Tôm sốt Thái là món hải sản đậm vị với vị chua cay mặn ngọt rất bắt miệng",
         time: "30 phút",
         difficulty: "Dễ",
         serves: "3 người",
         ingredients: [
             "500g tôm",
-            "4 lá chanh",
-            "3 quả ớt",
+            "3 tép tỏi",
+            "2 quả ớt",
+            "2 thìa tương ớt",
             "2 thìa nước mắm",
             "1 thìa đường",
+            "1 quả chanh",
             "Dầu ăn"
         ],
         steps: [
-            "Rán tôm cho chín",
-            "Thêm chanh, ớt, gia vị",
-            "Đảo nhanh lửa to",
-            "Xếp lên đĩa"
+            "Tôm rửa sạch, cắt râu và để ráo",
+            "Phi thơm tỏi với một ít dầu ăn rồi cho tôm vào đảo săn",
+            "Thêm nước mắm, đường, tương ớt và ớt băm vào chảo",
+            "Đảo đều trên lửa vừa để sốt áo quanh tôm",
+            "Vắt nước cốt chanh vào sau cùng rồi đảo nhanh tay",
+            "Bày ra đĩa và dùng nóng"
         ]
     },
     {

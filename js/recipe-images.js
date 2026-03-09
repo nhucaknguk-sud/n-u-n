@@ -40,7 +40,7 @@ const recipeImages = {
     11: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Mì Quảng
     13: "https://images.unsplash.com/photo-1612874742237-6526221fcb3b?w=500&h=500&fit=crop", // Canh Dưa Chua Cá
     15: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Lẩu Thái
-    19: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Tô Mì Vằn Thắn
+    19: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Mì Hoành Thắn
     21: "https://images.unsplash.com/photo-1612874742237-6526221fcb3b?w=500&h=500&fit=crop", // Canh Dưa Chua Cá
     27: "https://images.unsplash.com/photo-1604899573693-2c1b6c6c6c6?w=500&h=500&fit=crop", // Gỏi Bưởi
     30: "https://images.unsplash.com/photo-1626787620051-f57b3d3ce1b9?w=500&h=500&fit=crop", // Bún Chả Hà Nội
@@ -82,7 +82,7 @@ const recipeImages = {
 
     // Grilled & Roasted Meats
     6: localRecipeImages[6], // Nem Rán
-    16: "https://images.unsplash.com/photo-1639533635651-8c4e1f46c0ba?w=500&h=500&fit=crop", // Tôm Cốc Tắc
+    24: "https://images.unsplash.com/photo-1639533635651-8c4e1f46c0ba?w=500&h=500&fit=crop", // Tôm Sốt Thái
     17: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&h=500&fit=crop", // Bò Nướng Lá Chanh
     23: "https://images.unsplash.com/photo-1482769557014-da9dd8fac0a6?w=500&h=500&fit=crop", // Thịt Kho Tàu
     25: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=500&h=500&fit=crop", // Bò Nướng Lá Chanh
