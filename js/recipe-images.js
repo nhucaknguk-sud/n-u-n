@@ -19,7 +19,11 @@ const localRecipeImages = {
     13: "images/canh-chua.png",
     14: "images/banh-mi.png",
     15: "images/lau-thai.png",
-    16: "images/tau-hu-nuoc-duong.png"
+    16: "images/tau-hu-nuoc-duong.png",
+    17: "images/banh-trang-luong-me.png",
+    18: "images/lau-ca-chua.png",
+    19: "images/mi-van-thanh.png",
+    20: "images/banh-khoai-hoi-an.png"
 };
 
 const recipeImages = {
