@@ -835,32 +835,6 @@ const recipes = [
         ]
     },
     {
-        id: 29,
-        title: "Cơm Cá Trích",
-        category: "cơm",
-        emoji: "🍚",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/J8QW-kZwUAk",
-        description: "Cơm cá trích mặn ngon, bổ dưỡng",
-        time: "1 giờ",
-        difficulty: "Dễ",
-        serves: "2 người",
-        ingredients: [
-            "2 bát cơm",
-            "2 con cá trích",
-            "2 quả trứng",
-            "Hành lá",
-            "Dầu ăn"
-        ],
-        steps: [
-            "Cá rửa sạch, xay nhuyễn",
-            "Rán hành với dầu ăn",
-            "Cho cá vào rán",
-            "Rán trứng ốp la",
-            "Xếp lên cơm"
-        ]
-    },
-    {
         id: 30,
         title: "Bún Chả Hà Nội",
         category: "canh",
@@ -941,31 +915,6 @@ const recipes = [
         ]
     },
     {
-        id: 33,
-        title: "Cộng Chiên",
-        category: "mặn",
-        emoji: "🍤",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/c4QVe3brvko",
-        description: "Cộng chiên vàng giòn ngon lạ",
-        time: "45 phút",
-        difficulty: "Trung bình",
-        serves: "3 người",
-        ingredients: [
-            "400g cộng tươi",
-            "100g bột mì",
-            "2 quả trứng",
-            "3 quả ớt",
-            "Dầu ăn"
-        ],
-        steps: [
-            "Cộng rửa sạch",
-            "Lăn bột",
-            "Chiên vàng",
-            "Xếp lên đĩa"
-        ]
-    },
-    {
         id: 34,
         title: "Rau Muống Xào Tỏi",
         category: "chay",
@@ -1015,30 +964,6 @@ const recipes = [
             "Cho cua vào rán",
             "Thêm me, đường, nước mắm",
             "Nấu cho cua chín"
-        ]
-    },
-    {
-        id: 36,
-        title: "Trứng Cút Nướng Muối",
-        category: "mặn",
-        emoji: "🥚",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/BQf4-gvWy-s",
-        description: "Trứng cút nướng muối dễ làm",
-        time: "30 phút",
-        difficulty: "Dễ",
-        serves: "3 người",
-        ingredients: [
-            "12 quả trứng cút",
-            "2 thìa muối",
-            "2 thìa tiêu",
-            "Lá chuối"
-        ],
-        steps: [
-            "Trứng rửa sạch",
-            "Sắp trên lá chuối",
-            "Nướng trên bếp than",
-            "Nướng khoảng 15 phút"
         ]
     },
     {
@@ -1094,82 +1019,6 @@ const recipes = [
             "Trộn đu đủ, tôm",
             "Nêm nước mắm chua",
             "Rắc đậu phộng, ớt"
-        ]
-    },
-    {
-        id: 39,
-        title: "Cơm Tươi Phủ",
-        category: "cơm",
-        emoji: "🍚",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/ItKTGdH6bJM",
-        description: "Cơm tươi phủ là cơm nóng",
-        time: "30 phút",
-        difficulty: "Dễ",
-        serves: "2 người",
-        ingredients: [
-            "2 bát cơm",
-            "1 quả trứng",
-            "50g thịt lợn",
-            "50g rau",
-            "1 thìa nước mắm"
-        ],
-        steps: [
-            "Nấu cơm",
-            "Rán thịt lợn",
-            "Rán trứng",
-            "Xếp lên cơm",
-            "Thêm rau"
-        ]
-    },
-    {
-        id: 40,
-        title: "Mò Nướng Muối Ớt",
-        category: "mặn",
-        emoji: "🐚",
-        image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/IzKGDvL3BrE",
-        description: "Mò nướng muối ớt thơm ngon",
-        time: "30 phút",
-        difficulty: "Dễ",
-        serves: "3 người",
-        ingredients: [
-            "500g mò",
-            "3 thìa muối",
-            "3 quả ớt",
-            "2 thìa tiêu",
-            "Dầu ăn"
-        ],
-        steps: [
-            "Mò rửa sạch",
-            "Ướp muối ớt",
-            "Nướng trên than",
-            "Nướng 10 phút"
-        ]
-    },
-    {
-        id: 41,
-        title: "Canh Tao Tằm",
-        category: "canh",
-        emoji: "🍲",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/oJwL7HBfVQs",
-        description: "Canh tao tằm bổ dưỡng",
-        time: "1 giờ",
-        difficulty: "Dễ",
-        serves: "4 người",
-        ingredients: [
-            "200g tao",
-            "200g tằm",
-            "50g hành khô",
-            "500ml nước dùng",
-            "2 thìa nước mắm"
-        ],
-        steps: [
-            "Nấu nước dùng từ xương",
-            "Thêm tao, tằm",
-            "Nấu cho mềm",
-            "Nêm gia vị"
         ]
     },
     {
@@ -1276,31 +1125,6 @@ const recipes = [
         ]
     },
     {
-        id: 46,
-        title: "Dưa Leo Omelette",
-        category: "chay",
-        emoji: "🍳",
-        image: "https://images.unsplash.com/photo-1585032226651-759b98d7afd4?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/kRH-xM8GKAQ",
-        description: "Dưa leo Omelette dễ làm",
-        time: "20 phút",
-        difficulty: "Dễ",
-        serves: "2 người",
-        ingredients: [
-            "2 quả dưa leo",
-            "3 quả trứng",
-            "1 cây hành",
-            "Dầu ăn",
-            "Muối, tiêu"
-        ],
-        steps: [
-            "Dưa thái mỏng",
-            "Rán dưa",
-            "Đổ trứng vào",
-            "Cuốn lại"
-        ]
-    },
-    {
         id: 47,
         title: "Chả Lụa Hà Nội",
         category: "mặn",
@@ -1323,31 +1147,6 @@ const recipes = [
             "Trộn với gia vị",
             "Nhồi vào ống giấy",
             "Luộc trong nước nóng 1.5 giờ"
-        ]
-    },
-    {
-        id: 48,
-        title: "Cơm Tôi Chiêu",
-        category: "cơm",
-        emoji: "🍚",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/D8qNUqVLydQ",
-        description: "Cơm tôi chiêu mặn ngon",
-        time: "30 phút",
-        difficulty: "Dễ",
-        serves: "2 người",
-        ingredients: [
-            "2 bát cơm",
-            "100g tôi",
-            "1 quả trứng",
-            "1 cây hành",
-            "Dầu ăn"
-        ],
-        steps: [
-            "Rán tôi",
-            "Thêm cơm đảo",
-            "Rán trứng",
-            "Trộn hành"
         ]
     },
     {
@@ -1399,58 +1198,6 @@ const recipes = [
             "Sắp vào nồi hấp",
             "Tưới rượu, gia vị",
             "Hấp 30-40 phút"
-        ]
-    },
-    {
-        id: 51,
-        title: "Bánh Hoai Cuốn",
-        category: "cơm",
-        emoji: "🥟",
-        image: "https://images.unsplash.com/photo-1609501676725-7186f017a4b1?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/X6pCLZPf_pU",
-        description: "Bánh hoai cuốn với nhân thơm",
-        time: "1 giờ",
-        difficulty: "Khó",
-        serves: "4 người",
-        ingredients: [
-            "200g bột mì",
-            "100g thịt heo",
-            "100g tôm",
-            "100ml nước dừa",
-            "Lá chuối"
-        ],
-        steps: [
-            "Trộn bột với nước dừa",
-            "Thêm thịt, tôm",
-            "Cuốn bằng lá chuối",
-            "Hấp 30 phút",
-            "Tưới mỡ lợn nóng"
-        ]
-    },
-    {
-        id: 52,
-        title: "Lẩu Cua Cà Rốt",
-        category: "canh",
-        emoji: "🍲",
-        image: "https://images.unsplash.com/photo-1554080221-cbf002563ae9?w=500&h=500&fit=crop",
-        video: "https://www.youtube.com/embed/qWJl_d8bCvI",
-        description: "Lẩu cua cà rốt ngon lành",
-        time: "1.5 giờ",
-        difficulty: "Trung bình",
-        serves: "4 người",
-        ingredients: [
-            "1 con cua",
-            "200g cà rốt",
-            "100g nấm",
-            "500ml nước dùng",
-            "2 thìa nước mắm"
-        ],
-        steps: [
-            "Cua chặt, rửa sạch",
-            "Cà rốt cắt khúc",
-            "Nấu nước dùng từ xương cua",
-            "Hạ cua, cà rốt vào",
-            "Nấu 30 phút"
         ]
     },
     {
