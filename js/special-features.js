@@ -9,8 +9,25 @@
 // ============== FAVORITES SYSTEM ==============
 class FavoritesManager {
     constructor() {
-        this.storageKey = 'nauan_favorites';
+        this.baseStorageKey = 'nauan_favorites';
+        this.storageKey = this.getStorageKey();
         this.favorites = this.loadFavorites();
+    }
+
+    getStorageKey() {
+        const userId = window.authManager?.getCurrentUserId?.();
+        return `${this.baseStorageKey}_${userId || 'guest'}`;
+    }
+
+    syncStorageContext() {
+        const nextStorageKey = this.getStorageKey();
+        if (nextStorageKey === this.storageKey) {
+            return;
+        }
+
+        this.storageKey = nextStorageKey;
+        this.favorites = this.loadFavorites();
+        this.updateUI();
     }
 
     loadFavorites() {
@@ -77,12 +94,29 @@ class FavoritesManager {
 // ============== RATING SYSTEM ==============
 class RatingManager {
     constructor() {
-        this.storageKey = 'nauan_ratings';
+        this.baseStorageKey = 'nauan_ratings';
+        this.storageKey = this.getStorageKey();
         this.clientIdKey = 'nauan_rating_client_id';
         this.ratings = this.loadRatings();
         this.communityRatings = {};
         this.apiBaseUrl = this.getApiBaseUrl();
         this.apiAvailable = false;
+    }
+
+    getStorageKey() {
+        const userId = window.authManager?.getCurrentUserId?.();
+        return `${this.baseStorageKey}_${userId || 'guest'}`;
+    }
+
+    syncStorageContext() {
+        const nextStorageKey = this.getStorageKey();
+        if (nextStorageKey === this.storageKey) {
+            return;
+        }
+
+        this.storageKey = nextStorageKey;
+        this.ratings = this.loadRatings();
+        this.refreshRatingUI();
     }
 
     loadRatings() {
@@ -99,8 +133,16 @@ class RatingManager {
             return '/api/ratings';
         }
 
-        const { hostname, origin } = window.location;
-        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        const { hostname, origin, port, protocol } = window.location;
+        if (port === '3000') {
+            return `${origin}/api/ratings`;
+        }
+
+        if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.test') || hostname.endsWith('.local')) {
+            return `${protocol}//${hostname}:3000/api/ratings`;
+        }
+
+        if (!port || port === '80' || port === '443') {
             return `http://${hostname}:3000/api/ratings`;
         }
 
@@ -108,6 +150,11 @@ class RatingManager {
     }
 
     getClientId() {
+        const userId = window.authManager?.getCurrentUserId?.();
+        if (userId) {
+            return `user_${userId}`;
+        }
+
         let clientId = localStorage.getItem(this.clientIdKey);
 
         if (!clientId) {
@@ -250,7 +297,23 @@ class RatingManager {
 // ============== COLLECTIONS SYSTEM ==============
 class CollectionsManager {
     constructor() {
-        this.storageKey = 'nauan_collections';
+        this.baseStorageKey = 'nauan_collections';
+        this.storageKey = this.getStorageKey();
+        this.collections = this.loadCollections();
+    }
+
+    getStorageKey() {
+        const userId = window.authManager?.getCurrentUserId?.();
+        return `${this.baseStorageKey}_${userId || 'guest'}`;
+    }
+
+    syncStorageContext() {
+        const nextStorageKey = this.getStorageKey();
+        if (nextStorageKey === this.storageKey) {
+            return;
+        }
+
+        this.storageKey = nextStorageKey;
         this.collections = this.loadCollections();
     }
 
@@ -392,6 +455,10 @@ function initAdvancedSearch() {
 // ============== UI HELPER FUNCTIONS ==============
 function toggleFavorite(recipeId, event) {
     event.stopPropagation();
+    if (!window.authManager?.ensureAuthenticated?.('Đăng nhập để lưu món yêu thích')) {
+        return;
+    }
+
     favoritesManager.toggleFavorite(recipeId);
     
     // Show toast notification
@@ -413,6 +480,10 @@ async function setRating(recipeId, rating, event) {
 
 function addToCollection(recipeId, collectionName, event) {
     if (event) event.stopPropagation();
+    if (!window.authManager?.ensureAuthenticated?.('Đăng nhập để lưu vào danh sách')) {
+        return;
+    }
+
     collectionsManager.addToCollection(collectionName, recipeId);
     showToast(`✅ Đã thêm vào danh sách: ${collectionName}`, 'success');
 }
@@ -468,6 +539,10 @@ function closeAdvancedSearch() {
 }
 
 function showCollectionsModal(recipeId) {
+    if (!window.authManager?.ensureAuthenticated?.('Đăng nhập để quản lý danh sách món ăn')) {
+        return;
+    }
+
     const modal = document.createElement('div');
     modal.className = 'modal';
     modal.id = 'collectionsModal';
@@ -503,4 +578,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initAdvancedSearch();
     favoritesManager.updateUI();
     ratingManager.init();
+
+    window.addEventListener('authchange', () => {
+        favoritesManager.syncStorageContext();
+        collectionsManager.syncStorageContext();
+        ratingManager.syncStorageContext();
+    });
 });

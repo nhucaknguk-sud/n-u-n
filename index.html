@@ -21,6 +21,10 @@
                 <a href="#categories" class="nav-link">Danh Mục</a>
                 <a href="#contact" class="nav-link">Liên Hệ</a>
             </div>
+            <div class="nav-auth" id="authControls">
+                <button class="nav-auth-btn nav-auth-btn-secondary" type="button" data-auth-open="login">Đăng nhập</button>
+                <button class="nav-auth-btn nav-auth-btn-primary" type="button" data-auth-open="register">Tạo tài khoản</button>
+            </div>
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -221,6 +225,50 @@
         </div>
     </div>
 
+    <div id="authModal" class="modal">
+        <div class="modal-content auth-modal-content">
+            <span class="modal-close" onclick="closeAuthModal()">&times;</span>
+            <div class="auth-modal-header">
+                <p class="auth-eyebrow">Tài khoản cá nhân</p>
+                <h2 id="authModalTitle">Đăng nhập để lưu món yêu thích</h2>
+                <p id="authModalDescription">Tạo tài khoản hoặc đăng nhập để đồng bộ danh sách đã lưu của bạn.</p>
+            </div>
+            <div class="auth-tabs" role="tablist" aria-label="Chọn biểu mẫu tài khoản">
+                <button type="button" class="auth-tab active" data-auth-tab="login">Đăng nhập</button>
+                <button type="button" class="auth-tab" data-auth-tab="register">Tạo tài khoản</button>
+            </div>
+            <div id="authFeedback" class="auth-feedback" aria-live="polite"></div>
+
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" placeholder="ban@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mật khẩu</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="Nhập mật khẩu" minlength="6" required>
+                </div>
+                <button type="submit" class="cta-btn auth-submit-btn">Đăng nhập</button>
+            </form>
+
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">Họ và tên</label>
+                    <input type="text" id="registerName" name="name" placeholder="Nguyễn Văn A" minlength="2" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" name="email" placeholder="ban@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Mật khẩu</label>
+                    <input type="password" id="registerPassword" name="password" placeholder="Ít nhất 6 ký tự" minlength="6" required>
+                </div>
+                <button type="submit" class="cta-btn auth-submit-btn">Tạo tài khoản</button>
+            </form>
+        </div>
+    </div>
+
     <!-- AI Advisor Chatbot -->
     <div id="aiAdvisorContainer" class="ai-advisor-container">
         <!-- Toggle Button -->
@@ -283,6 +331,7 @@
     <link rel="stylesheet" href="css/ai-advisor.css">
     <script src="config.js"></script>
     <script src="js/recipe-images.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/special-features.js"></script>
     <script src="js/ai-advisor.js"></script>
     <script src="js/script.js"></script>
