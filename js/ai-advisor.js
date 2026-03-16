@@ -81,11 +81,17 @@ class AIAdvisor {
             if (typeof window !== 'undefined') {
                 try {
                     // Determine backend URL
-                    let backendUrl = 'http://localhost:3000/api/chat';
-                    
-                    // For non-localhost environments, try same hostname
-                    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-                        backendUrl = `${window.location.protocol}//${window.location.hostname}:3000/api/chat`;
+                    let backendUrl = `${window.location.origin}/api/chat`;
+
+                    if (
+                        window.location.hostname === 'localhost' ||
+                        window.location.hostname === '127.0.0.1' ||
+                        window.location.hostname.endsWith('.test') ||
+                        window.location.hostname.endsWith('.local')
+                    ) {
+                        if (window.location.port !== '3000') {
+                            backendUrl = `${window.location.protocol}//${window.location.hostname}:3000/api/chat`;
+                        }
                     }
                     
                     const backendResponse = await fetch(backendUrl, {

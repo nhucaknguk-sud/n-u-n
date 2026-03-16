@@ -142,10 +142,6 @@ class RatingManager {
             return `${protocol}//${hostname}:3000/api/ratings`;
         }
 
-        if (!port || port === '80' || port === '443') {
-            return `http://${hostname}:3000/api/ratings`;
-        }
-
         return `${origin}/api/ratings`;
     }
 

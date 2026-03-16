@@ -21,10 +21,6 @@ class AuthManager {
             return `${protocol}//${hostname}:3000/api/auth`;
         }
 
-        if (!port || port === '80' || port === '443') {
-            return `http://${hostname}:3000/api/auth`;
-        }
-
         return `${origin}/api/auth`;
     }
 
@@ -81,17 +77,31 @@ class AuthManager {
     }
 
     async request(path, options = {}) {
-        const response = await fetch(`${this.apiBaseUrl}${path}`, {
-            ...options,
-            headers: {
-                'Content-Type': 'application/json',
-                ...this.getAuthHeaders(),
-                ...(options.headers || {})
+        let response;
+
+        try {
+            response = await fetch(`${this.apiBaseUrl}${path}`, {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...this.getAuthHeaders(),
+                    ...(options.headers || {})
+                }
+            });
+        } catch (error) {
+            if (error instanceof TypeError) {
+                throw new Error('Không kết nối được máy chủ đăng nhập. Backend auth chưa chạy hoặc chưa được deploy.');
             }
-        });
+
+            throw error;
+        }
 
         const data = await response.json().catch(() => ({}));
         if (!response.ok) {
+            if (response.status === 404) {
+                throw new Error('Trang này chưa có API đăng nhập ở production. Cần deploy backend auth hoặc tạo route /api/auth.');
+            }
+
             throw new Error(data.error || 'Yêu cầu thất bại');
         }
 
