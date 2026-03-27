@@ -8,7 +8,7 @@
     --primary-color: #d4a574;
     --secondary-color: #8b4513;
     --text-color: #333;
-    --light-bg: #f9f7f4;
+    --light-bg: #fce6a5;
     --white: #fff;
     --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
@@ -367,12 +367,62 @@ body {
     transition: transform 0.3s ease;
 }
 
+.recipe-brand-badge {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+    z-index: 2;
+}
+
+.recipe-brand-badge i {
+    color: var(--primary-color);
+}
+
 .recipe-card:hover .recipe-image img {
     transform: scale(1.1);
 }
 
 .recipe-content {
     padding: 20px;
+}
+
+.recipe-labels,
+.recipe-detail-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.recipe-label-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(212, 165, 116, 0.14);
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.recipe-label-chip i {
+    color: var(--primary-color);
+}
+
+.recipe-label-chip-detail {
+    background: var(--white);
+    box-shadow: 0 8px 18px rgba(139, 69, 19, 0.08);
 }
 
 .recipe-category {
@@ -669,6 +719,34 @@ body {
 
 .recipe-detail {
     animation: slideIn 0.3s ease;
+}
+
+.recipe-detail-hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.recipe-detail-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.18), rgba(139, 69, 19, 0.12));
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.recipe-detail-brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: var(--white);
 }
 
 .recipe-detail h2 {
@@ -1063,5 +1141,23 @@ body {
 
     .recipe-detail-meta {
         grid-template-columns: 1fr;
+    }
+
+    .recipe-brand-badge {
+        left: 10px;
+        right: 58px;
+        bottom: 10px;
+        font-size: 11px;
+        padding: 7px 10px;
+    }
+
+    .recipe-detail-brand {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .recipe-detail-labels,
+    .recipe-labels {
+        justify-content: center;
     }
 }

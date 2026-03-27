@@ -217,12 +217,12 @@ const recipes = [
     },
     {
         id: 8,
-        title: "Chè Đen",
+        title: "Chè Đậu Đen",
         category: "tráng miệng",
         emoji: "🥤",
         image: "images/che-den.png",
         video: "https://www.youtube.com/watch?v=z-XMpQGH6UE",
-        description: "Chè đen là một loại chè có công dụng mát và thanh thoát",
+        description: "Chè đậu đen là món chè thanh mát và dễ ăn",
         time: "2 giờ",
         difficulty: "Dễ",
         serves: "6 người",
@@ -941,7 +941,7 @@ const recipes = [
     },
     {
         id: 35,
-        title: "Cả Cua Rang Me",
+        title: "Cua Rang Me",
         category: "mặn",
         emoji: "🦀",
         image: "images/cua-rang-me.png",
@@ -1229,12 +1229,12 @@ const recipes = [
     },
     {
         id: 57,
-        title: "Tôm Rang Dừa",
+        title: "Tôm Rim Dừa",
         category: "mặn",
         emoji: "🥥",
         image: "images/tom-rang-dua.png",
         video: "https://www.youtube.com/watch?v=z-9R5fkfLzM",
-        description: "Tôm rang dừa thơm lừng",
+        description: "Tôm rim dừa thơm lừng, đậm vị",
         time: "30 phút",
         difficulty: "Dễ",
         serves: "3 người",
@@ -1518,6 +1518,29 @@ document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
 });
 
+function getCategoryLabel(category) {
+    const categoryLabels = {
+        all: 'Tất cả',
+        canh: 'Canh & Súp',
+        'cơm': 'Cơm & Cháo',
+        mặn: 'Mặn & Thịt',
+        chay: 'Chay & Rau',
+        'tráng miệng': 'Tráng Miệng'
+    };
+
+    return categoryLabels[category] || category;
+}
+
+function renderRecipeLabels(recipe, variant = 'card') {
+    const labels = [
+        `<span class="recipe-label-chip ${variant === 'detail' ? 'recipe-label-chip-detail' : ''}"><i class="fas fa-layer-group"></i> ${getCategoryLabel(recipe.category)}</span>`,
+        `<span class="recipe-label-chip ${variant === 'detail' ? 'recipe-label-chip-detail' : ''}"><i class="fas fa-signal"></i> ${recipe.difficulty}</span>`,
+        `<span class="recipe-label-chip ${variant === 'detail' ? 'recipe-label-chip-detail' : ''}"><i class="fas fa-clock"></i> ${recipe.time}</span>`
+    ];
+
+    return labels.join('');
+}
+
 // Display Recipes
 function displayRecipes(recipesToDisplay) {
     const recipesGrid = document.getElementById('recipesGrid');
@@ -1537,12 +1560,16 @@ function displayRecipes(recipesToDisplay) {
             <div class="recipe-image">
                 <img src="${recipe.image}" alt="${recipe.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                 <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:80px; background:linear-gradient(135deg, var(--primary-color), var(--secondary-color));">${recipe.emoji}</div>
+                <div class="recipe-brand-badge">
+                    <i class="fas fa-utensils"></i>
+                    <span>Nấu Ăn Việt</span>
+                </div>
                 <button class="favorite-btn" data-recipe-id="${recipe.id}" onclick="toggleFavorite(${recipe.id}, event)" title="Thêm vào yêu thích">
                     <i class="far fa-heart"></i>
                 </button>
             </div>
             <div class="recipe-content">
-                <span class="recipe-category">${recipe.category}</span>
+                <div class="recipe-labels">${renderRecipeLabels(recipe)}</div>
                 <h3 class="recipe-title">${recipe.title}</h3>
                 <p class="recipe-description">${recipe.description}</p>
                 <div class="recipe-meta">
@@ -1649,10 +1676,15 @@ function openRecipeModal(recipe) {
 
     modalBody.innerHTML = `
         <div class="recipe-detail">
-            <div style="text-align: center; margin-bottom: 30px;">
+            <div class="recipe-detail-hero">
+                <div class="recipe-detail-brand">
+                    <span class="recipe-detail-brand-mark"><i class="fas fa-utensils"></i></span>
+                    <span class="recipe-detail-brand-text">Nấu Ăn Việt</span>
+                </div>
                 <img src="${recipe.image}" alt="${recipe.title}" style="width:100%; max-width:400px; height:300px; object-fit:cover; border-radius:15px; margin-bottom:20px;" onerror="this.style.display='none'">
                 <div style="font-size: 80px; margin-bottom: 20px; display:${recipe.image ? 'none' : 'block'}">${recipe.emoji}</div>
                 <h2>${recipe.title}</h2>
+                <div class="recipe-detail-labels">${renderRecipeLabels(recipe, 'detail')}</div>
                 <p style="color: #666; font-size: 16px;">${recipe.description}</p>
                 ${recipe.video ? `<button class="cta-btn" onclick="openVideoModal('${recipe.video}')" style="margin-top: 15px;"><i class="fas fa-play"></i> Xem Video Hướng Dẫn</button>` : ''}
             </div>
